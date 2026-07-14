@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function(){var l=localStorage.getItem('lang')||'fr';document.documentElement.className='lang-'+l;})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Hulya Zorlu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: montrealbook;
+      font-display: swap;
+      src: url(assets/fonts/NeueMontreal-Regular.woff2) format("woff2"),
+           url(assets/fonts/NeueMontreal-Regular.woff) format("woff");
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 10px; }
+    body {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      background: #FFFFFF;
+      color: #1C1C1E;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── CADRE EXTÉRIEUR ── */
+    .frame {
+      margin: 12px;
+      min-height: calc(100vh - 24px);
+      border: 1px solid #1C1C1E;
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    /* ── BARRE DU HAUT ── */
+    .top-bar {
+      grid-column: 1 / 3;
+      grid-row: 1;
+      border-bottom: 1px solid #1C1C1E;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 20px;
+    }
+    .top-bar-label {
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #1C1C1E;
+    }
+    .top-nav {
+      display: flex;
+      gap: 3.2rem;
+    }
+    .top-link {
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1C1C1E;
+      transition: opacity 0.15s;
+    }
+    .top-link:hover { opacity: 0.45; }
+    .top-link.active { color: #1C1C1E; }
+
+    /* ── COLONNE GAUCHE ── */
+    .col-left {
+      grid-column: 1;
+      grid-row: 2;
+      border-right: 1px solid #1C1C1E;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
+    .photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .left-name {
+      font-size: 1.15rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.35;
+      color: #1C1C1E;
+      flex-shrink: 0;
+    }
+
+    /* ── COLONNE DROITE ── */
+    .col-right {
+      grid-column: 2;
+      grid-row: 2;
+      padding: 28px 44px 40px;
+    }
+
+    .right-header { margin-bottom: 2.8rem; }
+    .right-name {
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.3rem;
+    }
+    .right-role {
+      font-size: 1.2rem;
+      color: rgba(28,28,30,0.45);
+      margin-bottom: 0.3rem;
+    }
+    .right-contact {
+      font-size: 1.2rem;
+      color: rgba(28,28,30,0.45);
+    }
+    .right-contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .right-contact a:hover { text-decoration: underline; }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding-top: 2.4rem;
+      margin-top: 2.4rem;
+      border-top: 1px solid rgba(28,28,30,0.14);
+    }
+    .section-title {
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(28,28,30,0.38);
+      margin-bottom: 1.4rem;
+    }
+
+    /* BIO */
+    .bio p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #1C1C1E;
+      max-width: 70ch;
+    }
+    .bio p + p { margin-top: 1.2em; }
+
+    /* FORMATION */
+    .edu-item + .edu-item { margin-top: 1.4rem; }
+    .edu-degree {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    .edu-year {
+      font-size: 1.05rem;
+      color: rgba(28,28,30,0.38);
+      margin-top: 0.2rem;
+    }
+
+    /* COMPÉTENCES */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 2.6rem;
+    }
+    .skill-group-title {
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(28,28,30,0.38);
+      margin-bottom: 0.9rem;
+    }
+    .skill-list {
+      list-style: none;
+      font-size: 1.2rem;
+      line-height: 1.75;
+    }
+    .skill-lvl {
+      font-size: 1rem;
+      color: rgba(28,28,30,0.38);
+      margin-left: 0.5em;
+    }
+
+    /* ── BARRE DU BAS ── */
+    .bottom-bar {
+      grid-column: 1 / 3;
+      grid-row: 3;
+      border-top: 1px solid #1C1C1E;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 20px;
+    }
+    .bottom-label {
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #1C1C1E;
+    }
+    .bottom-nav {
+      display: flex;
+      gap: 3.2rem;
+    }
+    .bottom-link {
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1C1C1E;
+      transition: opacity 0.15s;
+    }
+    .bottom-link:hover { opacity: 0.45; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .frame {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        margin: 8px;
+      }
+      .col-left {
+        grid-column: 1; grid-row: 1;
+        border-right: none;
+        border-bottom: 1px solid #1C1C1E;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 2rem;
+        padding: 16px;
+      }
+      .photo { width: 88px; flex-shrink: 0; }
+      .col-right { grid-column: 1; grid-row: 2; padding: 24px; }
+      .bottom-bar { grid-column: 1; grid-row: 3; flex-wrap: wrap; gap: 1rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr; row-gap: 2rem; }
+      .bottom-nav { gap: 1.6rem; }
+    }
+
+    :focus-visible { outline: 2px solid #1C1C1E; outline-offset: 3px; }
+
+    /* ── LANGUAGE TOGGLE ── */
+    html.lang-en .t-fr { display: none !important; }
+    html.lang-fr .t-en { display: none !important; }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .lang-btn {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      color: rgba(28,28,30,0.35);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+      text-transform: uppercase;
+    }
+    .lang-btn:hover { color: #1C1C1E; }
+    .lang-btn.active { color: #1C1C1E; }
+    .lang-sep {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 1.05rem;
+      color: rgba(28,28,30,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="frame" role="main">
+
+    <!-- BARRE DU HAUT -->
+    <div class="top-bar">
+      <a href="index.html" class="top-link"><span class="t-fr">← Portfolio</span><span class="t-en">← Portfolio</span></a>
+      <nav class="top-nav" aria-label="Navigation principale" style="display:flex;align-items:center;gap:2rem;">
+        <div class="lang-toggle">
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <span class="lang-sep">/</span>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="about.html" class="top-link active"><span class="t-fr">À Propos</span><span class="t-en">About</span></a>
+      </nav>
+    </div>
+
+    <!-- GAUCHE : photo -->
+    <div class="col-left">
+      <div class="photo">
+        <img src="assets/hulyaa.jpg" alt="Hulya Zorlu, Product Designer" />
+      </div>
+    </div>
+
+    <!-- DROITE : tout le contenu -->
+    <div class="col-right">
+
+      <div class="right-header">
+        <p class="right-name">Hulya Zorlu</p>
+        <p class="right-role"><span class="t-fr">Product Designer &amp; Strat&eacute;gie Business</span><span class="t-en">Product Designer &amp; Business Strategy</span></p>
+        <p class="right-contact"><a href="mailto:zorluu.hulya@gmail.com">zorluu.hulya@gmail.com</a></p>
+      </div>
+
+      <div class="section bio">
+        <p class="section-title"><span class="t-fr">Profil</span><span class="t-en">Profile</span></p>
+        <p>
+          <span class="t-fr">Dipl&ocirc;m&eacute;e d&rsquo;un Master en Data Analytics &amp;&nbsp;Marketing Management &agrave; l&rsquo;INSEEC, mon profil est avant tout orient&eacute; business, strat&eacute;gie et donn&eacute;es. Une exp&eacute;rience en alternance au sein d&rsquo;une agence parisienne sp&eacute;cialis&eacute;e en marketing d&rsquo;influence m&rsquo;a permis de piloter des projets UX et de mesurer &agrave; quel point une d&eacute;cision de design est aussi une d&eacute;cision business.</span>
+          <span class="t-en">I hold a Master's in Data Analytics &amp; Marketing Management from INSEEC, and my background is primarily rooted in business, strategy, and data. A work-study experience at a Paris-based influence marketing agency gave me the chance to lead UX projects and see firsthand how every design decision is also a business decision.</span>
+        </p>
+        <p>
+          <span class="t-fr">Pour aller plus loin, j&rsquo;ai choisi le Certificat Design UX/UI &amp; D&eacute;veloppement Web &agrave; l&rsquo;emlyon Business School (La Toile)&nbsp;: la formation qui me manquait pour allier ce socle business et data &agrave; une vraie ma&icirc;trise du design produit. Au sein de projets de groupe, j&rsquo;ai conduit l&rsquo;ensemble du processus de conception, de la recherche utilisateur au prototypage, et acquis les bases du d&eacute;veloppement front-end pour int&eacute;grer mes designs en HTML, CSS et JavaScript.</span>
+          <span class="t-en">To go further, I chose the UX/UI Design &amp; Web Development Certificate at emlyon Business School (La Toile): the missing piece to pair that business and data foundation with real product design skills. Working on group projects, I led the full design process, from user research through to prototyping, and built front-end skills to implement my designs in HTML, CSS, and JavaScript.</span>
+        </p>
+        <p>
+          <span class="t-fr">Ma vraie force, c&rsquo;est ce double profil business et design. Je ne con&ccedil;ois jamais une interface pour elle-m&ecirc;me&nbsp;: chaque choix r&eacute;pond &agrave; un objectif mesurable, qu&rsquo;il s&rsquo;agisse de croissance, d&rsquo;engagement ou de conversion. La recherche, les tests et la donn&eacute;e valident mes d&eacute;cisions&nbsp;; la cr&eacute;ativit&eacute; leur donne forme.</span>
+          <span class="t-en">My real strength is that dual profile: business and design. I never design an interface for its own sake: every choice serves a measurable goal, whether growth, engagement, or conversion. Research, testing, and data validate my decisions; creativity gives them shape.</span>
+        </p>
+        <p>
+          <span class="t-fr">Curieuse de nature, j&rsquo;observe les d&eacute;tails que d&rsquo;autres survolent&nbsp;: une affiche bien compos&eacute;e, une appli bien pens&eacute;e, un choix typographique. Avoir grandi entre plusieurs cultures et langues m&rsquo;a appris &agrave; regarder un m&ecirc;me probl&egrave;me sous plusieurs angles avant de trancher, un r&eacute;flexe que j&rsquo;applique &agrave; chaque projet design.</span>
+          <span class="t-en">Curious by nature, I notice the details others skim past: a well-composed poster, a thoughtful app, a typographic choice. Growing up across multiple cultures and languages taught me to look at the same problem from several angles before deciding, a habit I bring to every design project.</span>
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-title"><span class="t-fr">Formation</span><span class="t-en">Education</span></p>
+        <div class="edu-item">
+          <p class="edu-degree">Certificat Design UX/UI &amp; D&eacute;veloppement Web</p>
+          <p class="edu-year">emlyon - La Toile &middot; 2026</p>
+        </div>
+        <div class="edu-item">
+          <p class="edu-degree">Master Data Analytics &amp;&nbsp;Marketing Management</p>
+          <p class="edu-year">INSEEC &middot; 2024</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title"><span class="t-fr">Comp&eacute;tences</span><span class="t-en">Skills</span></p>
+        <div class="skills-grid">
+          <div>
+            <p class="skill-group-title">UX Design</p>
+            <ul class="skill-list">
+              <li><span class="t-fr">Recherche Utilisateur</span><span class="t-en">User Research</span></li>
+              <li><span class="t-fr">Tests d&rsquo;Utilisabilit&eacute;</span><span class="t-en">Usability Testing</span></li>
+              <li>Wireframing</li>
+              <li><span class="t-fr">Strat&eacute;gie UX</span><span class="t-en">UX Strategy</span></li>
+              <li><span class="t-fr">Parcours Utilisateur</span><span class="t-en">User Journey Mapping</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="skill-group-title"><span class="t-fr">UI &amp; Outils</span><span class="t-en">UI &amp; Tools</span></p>
+            <ul class="skill-list">
+              <li>Figma</li>
+              <li>Affinity Designer</li>
+              <li>Illustrator &middot; Photoshop</li>
+              <li>HTML / CSS / JS</li>
+              <li>Design System</li>
+            </ul>
+          </div>
+          <div>
+            <p class="skill-group-title"><span class="t-fr">Strat&eacute;gie Business &amp; Data</span><span class="t-en">Business Strategy &amp; Data</span></p>
+            <ul class="skill-list">
+              <li><span class="t-fr">Analyse de Donn&eacute;es</span><span class="t-en">Data Analysis</span></li>
+              <li><span class="t-fr">Strat&eacute;gie Produit</span><span class="t-en">Product Strategy</span></li>
+              <li><span class="t-fr">Marketing Management</span><span class="t-en">Marketing Management</span></li>
+              <li>KPIs &middot; A/B Testing</li>
+              <li><span class="t-fr">&Eacute;tude de March&eacute;</span><span class="t-en">Market Research</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="skill-group-title"><span class="t-fr">Langues</span><span class="t-en">Languages</span></p>
+            <ul class="skill-list">
+              <li><span class="t-fr">Français</span><span class="t-en">French</span> <span class="skill-lvl"><span class="t-fr">Natif</span><span class="t-en">Native</span></span></li>
+              <li><span class="t-fr">Anglais</span><span class="t-en">English</span> <span class="skill-lvl">C1</span></li>
+              <li><span class="t-fr">Turc</span><span class="t-en">Turkish</span> <span class="skill-lvl"><span class="t-fr">Natif</span><span class="t-en">Native</span></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BARRE DU BAS -->
+    <div class="bottom-bar"></div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

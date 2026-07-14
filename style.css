@@ -1,0 +1,1359 @@
+/* =============================================================
+   HULYA ZORLU — Portfolio v22
+   montrealbook (NeueMontreal Regular) — Eva Sánchez style
+   Cream #F8F6F2 · Black #0A0A0A
+   ============================================================= */
+
+/* ── Font ─────────────────────────────────────────────────────── */
+@font-face {
+  font-family: montrealbook;
+  font-display: swap;
+  src: url(assets/fonts/NeueMontreal-Regular.woff2) format("woff2"),
+       url(assets/fonts/NeueMontreal-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ── Typewriter font (Courier Prime = Type Machine style) ─────── */
+/* Quand tu télécharges TypeMachine.woff2 depuis dafont → assets/fonts/
+   et tu remplaces 'Courier Prime' par typemachine ci-dessous */
+.tm { font-family: 'Courier Prime', monospace; }
+
+.courier-prime-regular        { font-family: 'Courier Prime', monospace; font-weight: 400; font-style: normal; }
+.courier-prime-bold           { font-family: 'Courier Prime', monospace; font-weight: 700; font-style: normal; }
+.courier-prime-regular-italic { font-family: 'Courier Prime', monospace; font-weight: 400; font-style: italic; }
+.courier-prime-bold-italic    { font-family: 'Courier Prime', monospace; font-weight: 700; font-style: italic; }
+
+/* ── CSS Variables ────────────────────────────────────────────── */
+:root {
+  --ck_accent: #fff;
+  --ck_other: #050505;
+  --bg: #F8F6F2;
+  --fg: #0A0A0A;
+  --col-line: rgba(10,10,10,0.07);
+  --mg: 16px;
+  --gg: 24px;
+  /* column unit: col_width + gap = (100vw - 2*mg + gg) / 12 */
+  --col-unit: calc((100vw - 2 * var(--mg) + var(--gg)) / 12);
+}
+
+/* ── Reset ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 10px; scroll-behavior: smooth; }
+
+body {
+  font-family: montrealbook, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+button { background: none; border: none; cursor: pointer; padding: 0; }
+
+/* ── GRID BACKGROUND ─────────────────────────────────────────── */
+.Mbg {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--gg);
+  padding: 0 var(--mg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Double tiret vertical : 2 lignes séparées de 6px, tirets 9px/18px */
+.Mbg_col {
+  display: flex;
+  flex-direction: column;
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(10,10,10,0.08) 0, rgba(10,10,10,0.08) 9px, transparent 9px, transparent 18px),
+    repeating-linear-gradient(to bottom, rgba(10,10,10,0.08) 0, rgba(10,10,10,0.08) 9px, transparent 9px, transparent 18px);
+  background-size: 1px 18px, 1px 18px;
+  background-position: right 0px top 0, right 6px top 0;
+  background-repeat: repeat-y, repeat-y;
+}
+
+/* Marges extérieures propres — Swiss grid : règles entre colonnes seulement */
+.Mbg_col:last-child { background: none; }
+
+/* Tick horizontal supprimé — plus de trait dans la nav */
+.Mbg_col_el-1 { height: 0; flex-shrink: 0; }
+
+.Mbg_col_el-2 { flex: 1; }
+
+/* ── LANGUAGE TOGGLE ─────────────────────────────────────────── */
+html.lang-en .t-fr { display: none !important; }
+html.lang-fr .t-en { display: none !important; }
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.lang-btn {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.35);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+.lang-btn:hover { color: var(--fg); }
+.lang-btn.active { color: var(--fg); font-weight: 700; }
+.lang-sep {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  color: rgba(10,10,10,0.15);
+}
+.nav--dark .lang-btn { color: rgba(248,246,242,0.4); }
+.nav--dark .lang-btn:hover,
+.nav--dark .lang-btn.active { color: rgba(248,246,242,0.95); }
+.nav--dark .lang-sep { color: rgba(248,246,242,0.2); }
+
+/* ── NAV — grille 12 cols ─────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--gg);
+  align-items: center;
+  padding: 0 var(--mg);
+  overflow: visible;
+  height: 4.8rem;
+  background: transparent;
+}
+
+.nav::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(248,246,242,0.45) 0%,
+    rgba(248,246,242,0.15) 50%,
+    rgba(248,246,242,0) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+.nav_left {
+  grid-column: 2 / 4;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* Snap FR/EN onto the 1st dotted grid line (column 1 right edge) */
+  transform: translateX(calc(-1 * var(--gg)));
+}
+
+.nav_brand {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.65);
+  transition: color 0.55s ease;
+}
+.nav--dark .nav_brand { color: rgba(248,246,242,0.6); }
+
+.nav_clock {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.45);
+  transition: color 0.55s ease;
+}
+.nav--dark .nav_clock { color: rgba(248,246,242,0.4); }
+
+.nav_right {
+  grid-column: 8 / 13;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  /* snap first link onto col 8 right-edge dash */
+  transform: translateX(calc(var(--col-unit) - var(--gg)));
+}
+
+.nav_lk {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg);
+  transition: opacity 0.2s, color 0.55s ease;
+}
+.nav_lk:hover { opacity: 0.5; }
+.nav--dark .nav_lk { color: rgba(248,246,242,0.85); }
+
+.nav_cta {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #F0EEE9;
+  background: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 0;
+  padding: 2px 4px 1px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.nav_cta:hover { opacity: 0.75; }
+
+/* ── CSS Typewriter ───────────────────────────────────────────── */
+.typewriter-container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+/* blinking cursor — position:absolute so it never affects layout width */
+.typewriter-container:not(.done)::after {
+  content: '|';
+  color: var(--fg);
+  animation: tw-blink 0.55s step-end infinite;
+  position: absolute;
+  right: -6px;
+}
+
+.typewriter {
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/* Only clock + PORTFOLIO_26 still use clip-path typewriter */
+.tw-type { clip-path: inset(0 100% 0 0); }
+
+@keyframes typing { to { clip-path: inset(0 0% 0 0); } }
+@keyframes tw-blink { 50% { opacity: 0; } }
+
+/* ── Char reveal animation (.cn / .cf) ──────────────────────────── */
+.char {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.cw {
+  display: inline-block;
+  position: relative;
+}
+
+.cn {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(0.06em);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cf {
+  position: absolute;
+  left: 0; top: 0;
+  transform-origin: left center;
+  white-space: nowrap;
+  opacity: 0.22;
+  transition: transform 0.11s ease, opacity 0.11s ease;
+}
+
+.cw.done .cn { opacity: 1; transform: translateX(0); }
+.cw.done .cf { transform: scaleX(0); opacity: 0; }
+
+/* Title chars — fade + subtle rise */
+.ttj .char {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ttj .char.act { opacity: 1; transform: translateY(0); }
+
+/* Nav left hidden at start — JS reveals via typewriter */
+.nav_left { opacity: 0; }
+
+/* Nav right links + lang-toggle: typewriter-container starts hidden */
+.nav_lk .typewriter-container,
+.lang-toggle .typewriter-container { opacity: 0; }
+
+/* Socials hidden at start */
+.social_lk { opacity: 0; }
+
+/* Portfolio hidden at start */
+#portfolio-txt .typewriter-container { opacity: 0; }
+
+
+#scroll-txt { opacity: 0; }
+
+/* Subtitle dissolve */
+.tt3 {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.tt3.visible { opacity: 1; }
+
+/* ── BURGER ───────────────────────────────────────────────────── */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 24px;
+}
+.burger span {
+  display: block;
+  height: 1.5px;
+  background: var(--fg);
+  transition: transform 0.3s, opacity 0.3s, background 0.55s ease;
+}
+.nav--dark .burger span { background: var(--bg); }
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.burger.open span:nth-child(2) { opacity: 0; }
+
+/* ── MOBILE MENU ──────────────────────────────────────────────── */
+.mob-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--fg);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem var(--mg) 4rem;
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.mob-menu.open { transform: translateY(0); }
+
+.mob-close {
+  position: absolute;
+  top: 2rem; right: var(--mg);
+  font-size: 2rem;
+  color: var(--bg);
+}
+
+.mob-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.mob-link {
+  font-family: montrealbook;
+  font-size: 3.2rem;
+  color: var(--bg);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+.mob-link:hover { opacity: 0.6; }
+
+.mob-footer {
+  position: absolute;
+  bottom: 3.2rem;
+  left: var(--mg);
+  display: flex;
+  gap: 2.4rem;
+}
+.mob-footer a {
+  font-family: montrealbook;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: rgba(240,238,233,0.45);
+  text-transform: uppercase;
+}
+
+/* ── LOADER ───────────────────────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  transition: opacity 0.7s ease;
+}
+
+/* Compteur — haut droite (~3/4 de la page) */
+#loader-count {
+  position: absolute;
+  top: 10%;
+  right: 6%;
+  font-family: montrealbook, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(10rem, 22vw, 26rem);
+  color: #F0EEE9;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Texte — bas centre */
+#loader-info {
+  position: absolute;
+  bottom: 3.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+#loader-info span {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240,238,233,0.7);
+}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  background: transparent;
+  overflow: visible;
+}
+
+/* TITLE BLOCK : left edge snaps onto col 6 right-edge dash */
+/* x_right(6) = 50% - gg/2 = calc(50% - 12px), width independent */
+.hero_cnt {
+  position: absolute;
+  left: calc(var(--mg) - var(--gg) + 6 * var(--col-unit));
+  width: calc((100% - 324px) / 3 + 72px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.cnt_tt {
+  display: block;
+  font-family: montrealbook;
+  font-weight: 400;
+  font-size: clamp(6rem, 11vw, 16rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--fg);
+  margin-left: -0.06em;
+}
+
+.Atitle { display: block; }
+
+/* Z glyph has 1px less left side-bearing than H — optical correction */
+#title-zorlu { margin-left: 1px; }
+
+.ttj {
+  display: block;
+  /* pas de overflow:hidden — évite que le Y soit coupé */
+}
+
+.ttj .word { display: inline-block; }
+
+/* .char already defined above — title chars use .char.done via JS */
+
+/* ── SUBTITLE ─────────────────────────────────────────────────── */
+.cnt_bt { margin-top: 2.8rem; }
+
+.tt3 {
+  font-family: montrealbook;
+  font-weight: 400;
+  font-size: 1.65rem;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+.Awrite {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.4);
+  display: block;
+  margin-top: 0.7rem;
+}
+
+/* ── SCROLL TO EXPLORE — bottom center ───────────────────────── */
+.cnt_sc {
+  position: absolute;
+  bottom: 3.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  white-space: nowrap;
+}
+.cnt_sc .Awrite {
+  color: var(--fg);
+  margin-top: 0;
+}
+
+/* SOCIALS : left edge snapped to col 11 right-edge dash, overflow toward right margin allowed */
+.hero_socials {
+  position: absolute;
+  bottom: 3.2rem;
+  left: calc(var(--mg) - var(--gg) + 10 * (100% - 2 * var(--mg) + var(--gg)) / 12);
+  display: flex;
+  gap: 2rem;
+  z-index: 2;
+}
+
+.social_lk {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.45);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: color 0.2s;
+}
+.social_lk:hover { color: var(--fg); }
+.social_lk svg { width: 0.55rem; height: 0.55rem; }
+
+/* ── FEATURED WORKS ───────────────────────────────────────────── */
+.works {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--mg) 10rem;
+  margin-top: 12rem;
+}
+
+.works_hd {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 3.2rem;
+}
+
+.works_title {
+  font-family: montrealbook;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 5.2vw, 7.5rem);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  display: block;
+  /* snap left edge onto col 2 dash (indent exactly one column) */
+  margin-left: calc((100% - 11 * var(--gg)) / 12);
+  padding-right: 0.06em;
+  color: var(--fg);
+}
+
+.works_count {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: rgba(10,10,10,0.35);
+}
+
+.works_grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--gg);
+  row-gap: 8rem;
+  align-items: start;
+}
+
+.work_item {
+  display: block;
+  cursor: default;
+  /* snap cover left edge onto a dash; translate keeps cover size intact */
+  transform: translateX(calc(-1 * var(--gg)));
+}
+
+/* Grid alignment — each card snaps to a column left edge */
+.work_item               { grid-column: 2 / 6; }
+.work_item:nth-child(2)  { grid-column: 8 / 13; }
+.work_item:nth-child(3)  { grid-column: 3 / 6; }
+.work_item:nth-child(4)  { grid-column: 8 / 13; }
+
+.work_thumb {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+.work_item:hover .work_thumb { opacity: 0.88; }
+
+.work_cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work_thumb { position: relative; }
+
+.work_thumb--a { background: #E2E0DA; }
+.work_thumb--b { background: #0A0A0A; }
+.work_thumb--d {
+  background: #1C1C1E;
+  aspect-ratio: 1220 / 950;
+}
+.work_thumb--d .work_cover { object-fit: contain; }
+.work_item:nth-child(3) .work_thumb { aspect-ratio: 1 / 1; }
+
+.work_thumb--c {
+  background: #FFFFFF;
+  overflow: hidden;
+  position: relative;
+}
+/* Transparent product mockup: show it whole on the white background */
+.work_thumb--c .work_cover { object-fit: contain; }
+.work_bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+.work_cover--blur {
+  filter: blur(10px);
+  transform: scale(1.1);
+}
+.work_soon_overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.work_item--soon:hover .work_soon_overlay {
+  opacity: 1;
+}
+.work_soon_text {
+  background: rgba(255,255,255,0.92);
+  color: #1C1C1E;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.work_item--soon { cursor: default; }
+
+/* Project 1 — square */
+.work_item:nth-child(1) .work_thumb { aspect-ratio: 1 / 1; }
+
+/* Project 2 — large card, cols 8-12 */
+.work_item:nth-child(2) {
+  justify-self: auto;
+  width: auto;
+}
+
+/* Project 2 — SVG cover adapts to natural image proportions */
+.work_thumb--b {
+  aspect-ratio: auto;
+}
+.work_thumb--b .work_cover {
+  position: relative;
+  inset: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.work_meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 1.2rem;
+  opacity: 1;
+}
+
+.work_result {
+  flex-basis: 100%;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: rgba(10,10,10,0.72);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.work_num {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: rgba(10,10,10,0.35);
+}
+
+.work_name {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* ── SEE MORE cursor ──────────────────────────────────────────── */
+.see-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9000;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--fg);
+  padding: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(18px, 18px);
+  transition: opacity 0.2s ease;
+}
+.see-cursor.visible { opacity: 1; }
+
+/* ── SECTION LIGHT / DARK ─────────────────────────────────────── */
+.section-light { position: relative; z-index: 2; }
+.section-dark  { position: relative; z-index: 1; }
+
+/* Grid columns visible on dark sections — fixed attachment aligns with .Mbg */
+.section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc((100% - 2 * var(--mg) - 11 * var(--gg)) / 12 + var(--gg) - 1px),
+    rgba(248,246,242,0.10) calc((100% - 2 * var(--mg) - 11 * var(--gg)) / 12 + var(--gg) - 1px),
+    rgba(248,246,242,0.10) calc((100% - 2 * var(--mg) - 11 * var(--gg)) / 12 + var(--gg))
+  );
+  background-size: calc((100% - 2 * var(--mg) - 11 * var(--gg)) / 12 + var(--gg)) 100%;
+  background-position: calc(var(--mg) - var(--gg)) 0;
+  /* NB: no background-attachment:fixed — it triggers an iOS Safari repaint
+     bug that clips overlapping text. Horizontal column alignment is
+     position-based (full-width element) so it stays aligned without it. */
+}
+
+/* ── ABOUT ────────────────────────────────────────────────────── */
+.about_pretitle {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #F8F6F2;
+  letter-spacing: 0.01em;
+  /* snap left edge onto col 2 dash */
+  margin-left: calc((100% - 11 * var(--gg)) / 12);
+  margin-bottom: 1.2rem;
+}
+
+.about {
+  position: relative;
+  background: #0A0A0A;
+  min-height: 100vh;
+  padding: 4rem var(--mg) 8rem;
+}
+
+/* Tirets pointillés blancs alignés sur la grille — même rythme 9px/9px que le Mbg */
+.about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent calc(var(--col-unit) - 1px),
+      rgba(248,246,242,0.12) calc(var(--col-unit) - 1px),
+      rgba(248,246,242,0.12) var(--col-unit)
+    ),
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent calc(var(--col-unit) - 7px),
+      rgba(248,246,242,0.12) calc(var(--col-unit) - 7px),
+      rgba(248,246,242,0.12) calc(var(--col-unit) - 6px)
+    );
+  background-size: var(--col-unit) 100%, var(--col-unit) 100%;
+  background-position: calc(var(--mg) - var(--gg)) 0, calc(var(--mg) - var(--gg)) 0;
+  /* no background-attachment:fixed — avoids iOS Safari clipping bug */
+  -webkit-mask-image: repeating-linear-gradient(to bottom,
+    black 0, black 9px, transparent 9px, transparent 18px
+  );
+  mask-image: repeating-linear-gradient(to bottom,
+    black 0, black 9px, transparent 9px, transparent 18px
+  );
+}
+
+.about_inner {
+  position: relative;
+  min-height: calc(100vh - 18rem);
+  display: grid;
+  grid-template-columns: repeat(12, calc((100% + var(--gg)) / 12));
+  align-items: start;
+}
+
+.about_tag {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid rgba(248,246,242,0.12);
+  padding-top: 2rem;
+}
+.about_tag_num,
+.about_tag_label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  color: rgba(248,246,242,0.55);
+  letter-spacing: 0.1em;
+}
+/* Align "À PROPOS" onto the 1st dotted line, like the title/text below */
+.about_tag_label { margin-left: calc(var(--col-unit) - var(--gg)); }
+
+.about_title {
+  grid-column: 2 / 9;
+  grid-row: 2;
+  font-family: montrealbook, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 4.6vw, 7rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #F8F6F2;
+  position: relative;
+  z-index: 1;
+  transform: translateX(calc(-1 * var(--gg)));
+}
+.about_t1,
+.about_t2 {
+  display: block;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.about_desc {
+  grid-column: 9 / 12;
+  grid-row: 2;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+  color: rgba(248,246,242,0.82);
+  transform: translateX(calc(-1 * var(--gg)));
+}
+.about_desc p + p { margin-top: 1.3em; }
+
+.about_more {
+  position: absolute;
+  bottom: 0;
+  left: calc(6 * (100% - var(--gg)) / 12);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  color: rgba(248,246,242,0.65);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(248,246,242,0.3);
+  padding-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s, border-color 0.2s;
+}
+.about_more:hover {
+  color: #F8F6F2;
+  border-color: rgba(248,246,242,0.7);
+}
+
+/* ── EXPERIENCE + EDUCATION ───────────────────────────────────── */
+.xp {
+  padding: 0 var(--mg) 10rem;
+  margin-top: 0;
+}
+
+.xp_hd {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 0;
+  /* No bar above titles — uniform spacing for every section title */
+  margin-top: 4rem;
+  margin-bottom: 1.6rem;
+}
+.xp_hd--form { margin-top: 4rem; }
+
+.xp_sub_hd {
+  padding: 1.4rem 0 0.4rem;
+  margin-top: 2rem;
+}
+.xp_sub_label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.55);
+}
+
+.xp_label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: rgba(10,10,10,0.3);
+}
+
+.skills_num {
+  color: rgba(248,246,242,0.55);
+}
+
+.xp_title {
+  font-family: montrealbook, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 5.2vw, 7.5rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  color: var(--fg);
+  margin-left: calc((100% - 11 * var(--gg)) / 12);
+  margin-bottom: 0;
+}
+
+/* Skills: light color on dark bg */
+.skills .xp_title {
+  color: #F8F6F2;
+}
+
+.xp_list {
+  margin-top: 0;
+}
+
+.xp_item {
+  border-top: 1px solid rgba(10,10,10,0.1);
+  overflow: hidden;
+  cursor: default;
+}
+.xp_item:last-child { border-bottom: 1px solid rgba(10,10,10,0.1); }
+
+.xp_row {
+  display: grid;
+  /*
+   * Template ancré sur la grille 12 colonnes de la page.
+   * Col 1 = (col-unit - gg) : compense le gutter initial.
+   * Cols 2-12 = col-unit chacune, column-gap: 0.
+   * → bord gauche de chaque cellule coïncide exactement avec un tiret de grille.
+   *
+   * Affectation page-grille :
+   *   date      → tiret col 1  (grid-col 2/4)
+   *   entreprise → tiret col 3  (grid-col 4/7)
+   *   [col 7 vide — espace naturel d'une colonne]
+   *   lieu      → tiret col 7  (grid-col 8/10)
+   *   rôle      → tiret col 9  (grid-col 10/12)
+   *   flèche    → tiret col 11 (grid-col 12/13)
+   */
+  grid-template-columns: calc(var(--col-unit) - var(--gg)) repeat(11, var(--col-unit));
+  column-gap: 0;
+  align-items: center;
+  padding: 1.4rem 0;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.xp_row > .xp_date    { grid-column: 2 / 4; }
+.xp_row > .xp_co_wrap { grid-column: 4 / 7; }
+.xp_row > .xp_co      { grid-column: 4 / 7; }
+.xp_row > .xp_loc     { grid-column: 7 / 8; }
+.xp_row > .xp_role    { grid-column: 8 / 10; }
+.xp_row > .xp_arr     { grid-column: 10 / 11; justify-self: end; }
+
+.xp_item:hover .xp_row {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.xp_date {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: rgba(10,10,10,0.7);
+  transition: color 0.25s;
+}
+.xp_item:hover .xp_date { color: rgba(248,246,242,0.4); }
+
+.xp_co_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.xp_co {
+  font-family: montrealbook, sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  transition: color 0.25s;
+}
+.xp_item:hover .xp_co { color: var(--bg); }
+
+.xp_type {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: rgba(10,10,10,0.6);
+  transition: color 0.25s;
+}
+.xp_item:hover .xp_type { color: rgba(248,246,242,0.4); }
+
+.xp_loc {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.55);
+  transition: color 0.25s;
+}
+.xp_item:hover .xp_loc { color: rgba(248,246,242,0.35); }
+
+.xp_role {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.8);
+  transition: color 0.25s;
+}
+.xp_item:hover .xp_role { color: rgba(248,246,242,0.7); }
+
+.xp_arr {
+  font-size: 1.4rem;
+  color: rgba(10,10,10,0.2);
+  transition: color 0.25s, transform 0.25s;
+}
+.xp_item:hover .xp_arr { color: rgba(248,246,242,0.6); transform: translateX(6px); }
+
+.xp_reveal {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: rgba(248,246,242,0.55);
+  text-transform: uppercase;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.6rem;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  background: var(--fg);
+}
+.xp_item:hover .xp_reveal {
+  max-height: 4rem;
+  padding: 0.6rem 1.6rem 1rem;
+}
+
+/* ── SKILLS ───────────────────────────────────────────────────── */
+.skills {
+  padding: 0 var(--mg) 10rem;
+  background: #000;
+}
+.skills::before { display: none; }
+
+.skills_hd {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 4rem 0 0;
+  border-top: 1px solid rgba(248,246,242,0.1);
+  margin-bottom: 4rem;
+}
+
+.skills_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-left: 1px solid rgba(248,246,242,0.1);
+}
+
+.skill_col {
+  padding: 3rem 2.4rem;
+  border-right: 1px solid rgba(248,246,242,0.1);
+  border-bottom: 1px solid rgba(248,246,242,0.1);
+  border-top: 1px solid rgba(248,246,242,0.1);
+  transition: background 0.25s;
+}
+.skill_col:hover { background: rgba(248,246,242,0.04); }
+
+.skill_cat {
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: rgba(248,246,242,0.7);
+  margin-bottom: 2rem;
+}
+
+.skill_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill_item {
+  font-family: montrealbook, sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  color: #F8F6F2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: letter-spacing 0.2s, opacity 0.2s;
+}
+.skill_item:hover { letter-spacing: 0.04em; opacity: 0.7; }
+
+.skill_lvl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.9rem;
+  color: rgba(248,246,242,0.3);
+}
+
+/* Marquee strip */
+.skills_marquee {
+  overflow: hidden;
+  margin-top: 5rem;
+  border-top: 1px solid rgba(248,246,242,0.1);
+  padding: 1.8rem 0;
+}
+
+.marquee_track {
+  display: flex;
+  gap: 2.4rem;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: rgba(248,246,242,0.2);
+}
+.marquee_track span:not(:nth-child(odd)) { color: rgba(248,246,242,0.08); }
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── CONTACT ──────────────────────────────────────────────────── */
+.contact {
+  padding: 0 var(--mg) 10rem;
+  background: var(--bg);
+}
+
+.contact_hd {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid rgba(10,10,10,0.1);
+}
+
+.contact_body {
+  margin-top: 4rem;
+  /* snap left edge onto col 2 dash */
+  margin-left: calc((100% - 11 * var(--gg)) / 12);
+}
+
+.contact_pre {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.35);
+  margin-bottom: 2rem;
+}
+
+.contact_email {
+  display: inline-block;
+  font-family: montrealbook, sans-serif;
+  font-size: clamp(3.5rem, 7vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: var(--fg);
+  text-decoration: none;
+  position: relative;
+  transition: opacity 0.25s;
+}
+.contact_email:hover { opacity: 0.6; }
+
+.contact_email_arr {
+  font-size: 0.4em;
+  vertical-align: super;
+  margin-left: 0.2em;
+}
+
+.contact_foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 6rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(10,10,10,0.1);
+}
+
+.contact_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.4);
+}
+
+.contact_socials {
+  display: flex;
+  gap: 2.4rem;
+}
+.contact_socials a {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.contact_socials a:hover { opacity: 0.45; }
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+.footer {
+  background: #000;
+  padding: 2.4rem var(--mg);
+  border-top: 1px solid rgba(248,246,242,0.1);
+}
+
+.footer_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer_brand { color: rgba(248,246,242,0.3); }
+
+.footer_top {
+  color: rgba(248,246,242,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer_top:hover { color: #F8F6F2; }
+
+.footer_credit { color: rgba(248,246,242,0.2); }
+
+/* About responsive */
+@media (max-width: 900px) {
+  .about_title { font-size: clamp(2.6rem, 7vw, 6rem); }
+  .about_cols { grid-template-columns: 1fr; gap: 3rem; }
+  .xp_row { grid-template-columns: 1fr; gap: 0.4rem; }
+  .xp_row > .xp_date, .xp_row > .xp_co_wrap, .xp_row > .xp_co,
+  .xp_row > .xp_loc, .xp_row > .xp_role, .xp_row > .xp_arr { grid-column: 1; }
+  .xp_co { font-size: 1.2rem; }
+  .skills_grid { grid-template-columns: 1fr 1fr; }
+  .contact_foot { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .footer_inner { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav { display: flex; justify-content: space-between; }
+  .nav_right { display: none; }
+  .burger { display: flex; }
+
+  /* FR/EN toggle aligned to the 1st dotted grid line (no desktop shift here) */
+  .nav_left { margin-left: calc(var(--col-unit) - var(--gg)); transform: none; }
+
+  /* Hero title block starts at the 2nd dotted grid line */
+  .hero_cnt {
+    left: calc(var(--mg) + var(--col-unit) - var(--gg));
+    width: calc(100% - 2 * var(--mg) - var(--col-unit) + var(--gg));
+  }
+
+  .cnt_tt { font-size: clamp(5rem, 14vw, 9rem); }
+
+  .hero_socials { left: auto; right: var(--mg); gap: 1rem; }
+
+  .about_inner { grid-template-columns: 1fr; }
+  .about_tag { grid-column: 1; grid-row: 1; position: relative; z-index: 1; }
+  /* mobile already aligns the whole tag — avoid double-shifting the label */
+  .about_tag_label { margin-left: 0; }
+  .about_title { grid-column: 1; grid-row: 2; }
+  /* z-index keeps the text above the dotted ::before layer. Without the
+     desktop transform (removed on mobile) the text would otherwise paint
+     under that masked layer and iOS Safari clips the first line. */
+  .about_desc { grid-column: 1; grid-row: 3; margin-top: 3rem; position: relative; z-index: 1; }
+
+  /* Align content to the 2nd dotted grid line, remove off-screen transforms */
+  .about_tag,
+  .about_title,
+  .about_desc {
+    transform: none;
+    margin-left: calc(var(--col-unit) - var(--gg));
+    margin-right: 0;
+  }
+  .about_desc { margin-left: calc(var(--col-unit) - var(--gg)); }
+  .about_more { left: calc(var(--col-unit) - var(--gg)); }
+
+  /* Experience / Education / Skills: align to 1st dotted line.
+     NB: only the title/label/row get the indent — NOT their .xp_hd
+     wrapper, otherwise the title would be indented twice. */
+  .xp_title,
+  .xp_sub_hd,
+  .xp_row {
+    margin-left: calc(var(--col-unit) - var(--gg));
+  }
+  .xp_hd { margin-left: 0; }
+  .skills_hd .xp_title { margin-left: calc(var(--col-unit) - var(--gg)); }
+
+  /* Selected work title: align to 1st dotted line */
+  .works_title { margin-left: calc(var(--col-unit) - var(--gg)); }
+}
+
+@media (max-width: 600px) {
+  .cnt_tt { font-size: clamp(4.5rem, 15vw, 7rem); }
+
+  .hero_socials {
+    flex-direction: column;
+    gap: 1rem;
+    bottom: 5rem;
+  }
+
+  .cnt_sc { bottom: 2.4rem; }
+
+  .works_grid { grid-template-columns: 1fr; }
+  .work_item               { grid-column: auto; transform: none; }
+  .work_item:nth-child(2)  { grid-column: auto; width: auto; }
+  .work_item:nth-child(3)  { grid-column: auto; }
+  .works_title { font-size: clamp(2.1rem, 7.6vw, 6rem); }
+}
+
+/* ── WebGL title canvas ──────────────────────────────────── */
+#title-gl {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 1s ease;
+}

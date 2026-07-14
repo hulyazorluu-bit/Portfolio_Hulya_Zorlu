@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function(){var l=localStorage.getItem('lang')||'fr';document.documentElement.className='lang-'+l;})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande sans allergènes - Case Study UX/UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #1C1C1E; line-height: 1.5; }
+
+    /* NAV */
+    .nav {
+      background: #1C1C1E;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 80px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-left { display: flex; align-items: center; gap: 28px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-back { color: #8E8E93; text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-back:hover { color: #FF6B35; }
+    .nav-figma {
+      color: #FF6B35;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid #FF6B35;
+      padding: 6px 16px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-figma:hover { background: #FF6B35; color: #1C1C1E; }
+
+    /* CASE STUDY IMAGE */
+    .figma-section {
+      background: #0A0A0A;
+      padding: 0;
+      line-height: 0;
+    }
+    .figma-embed-wrap {
+      width: 100%;
+    }
+    .figma-embed-img {
+      width: 100%;
+      display: block;
+    }
+
+    /* LANGUAGE */
+    html.lang-en .t-fr { display: none !important; }
+    html.lang-fr .t-en { display: none !important; }
+    .lang-toggle { display:flex; align-items:center; gap:0.3rem; }
+    .lang-btn { font-family:'Inter',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.1em; color:#fff; background:none; border:none; cursor:pointer; padding:0; opacity:0.6; transition:opacity 0.2s; }
+    .lang-btn:hover { opacity:1; }
+    .lang-btn.active { opacity:1; }
+    .lang-sep { font-family:'Inter',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.3); }
+
+    /* RESPONSIVE */
+    body { overflow-x: clip; }
+    @media (max-width: 900px) {
+      .nav { padding: 16px 20px; flex-wrap: wrap; row-gap: 10px; }
+      .nav-left { gap: 16px; }
+      .nav-right { gap: 8px; }
+      .lang-toggle { position: static !important; transform: none !important; order: 3; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-back">&larr; Portfolio</a>
+    </div>
+    <div class="lang-toggle" style="position:absolute;left:50%;transform:translateX(-50%);">
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <div class="nav-right">
+      <a href="https://www.figma.com/design/0NM5ghnJNSKCaTUVtCliof/CASE-STUDY-Commande-sans-allerg%C3%A8nes?node-id=0-1&p=f&t=ZXnMBwU9TdNGYP3T-0"
+         target="_blank" rel="noopener" class="nav-figma">Figma &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- CASE STUDY -->
+  <section class="figma-section">
+    <div class="figma-embed-wrap t-fr">
+      <img src="assets/CASE_STUDY_FR.svg" alt="Case study Commande sans allerg&egrave;nes" class="figma-embed-img" />
+    </div>
+    <div class="figma-embed-wrap t-en">
+      <img src="assets/CASE_STUDY_EN.svg" alt="Case study Allergen-Free Ordering" class="figma-embed-img" />
+    </div>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>

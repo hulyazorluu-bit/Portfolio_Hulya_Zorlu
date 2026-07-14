@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function(){var l=localStorage.getItem('lang')||'fr';document.documentElement.className='lang-'+l;})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crosslines - Hackathon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B0B0C;
+      --bg-alt: #141416;
+      --fg: #F4F3F0;
+      --muted: var(--fg);
+      --line: rgba(244,243,240,0.12);
+      --accent: #E91E7B;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: clip;
+    }
+
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px 24px;
+    }
+    .nav-back { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .nav-back:hover { color: var(--fg); }
+    .nav-links { display: flex; align-items: center; gap: 18px; }
+    .nav-link {
+      appearance: none;
+      -webkit-appearance: none;
+      font-family: inherit;
+      color: var(--fg); text-decoration: none; font-size: 13px; font-weight: 600;
+      border: 1px solid var(--line); padding: 7px 14px; border-radius: 100px;
+      background: transparent; cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .nav-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* HERO */
+    .hero { padding: 60px 24px 0; text-align: center; }
+    .hero-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .hero-desc {
+      font-size: 18px; line-height: 1.55; color: var(--muted);
+      max-width: 540px; margin: 0 auto 28px;
+    }
+    .jury-line {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 34px;
+    }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+    .btn {
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      padding: 13px 24px; border-radius: 100px; transition: transform .2s, opacity .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--solid { background: var(--accent); color: #fff; }
+    .btn--solid:hover { opacity: 0.9; }
+    .btn--ghost { border: 1px solid var(--line); color: var(--fg); }
+    .btn--ghost:hover { border-color: var(--fg); }
+
+    .mockup-img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* SECTIONS */
+    .section { padding: 90px 24px; border-top: 1px solid var(--line); }
+    .eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 40px;
+    }
+    .section-desc {
+      font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .stat { border-top: 1px solid var(--line); padding-top: 22px; }
+    .stat-num { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .stat p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+    /* PERSONA */
+    .persona {
+      display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+    }
+    .persona-avatar {
+      width: 76px; height: 76px; border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .persona-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .persona-role { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .persona h4 {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px; margin-top: 18px;
+    }
+    .persona h4:first-of-type { margin-top: 0; }
+    .persona p, .persona li { font-size: 15px; line-height: 1.6; color: var(--muted); }
+    .persona ul { list-style: none; }
+    .persona li { padding: 3px 0; }
+
+    /* QUOTE / HMW */
+    .quote-box {
+      font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .pair > div { border-top: 1px solid var(--line); padding-top: 22px; }
+    .pair h3 {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .pair p { font-size: 16px; line-height: 1.7; color: var(--muted); }
+
+    /* BENEFITS */
+    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 48px; }
+    .benefit { border-top: 1px solid var(--line); padding-top: 22px; }
+    .benefit-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+    .benefit ul { list-style: none; }
+    .benefit li {
+      font-size: 14px; color: var(--muted); padding: 4px 0;
+    }
+    .closing-line {
+      text-align: center; font-size: clamp(1.3rem, 2.6vw, 1.9rem); font-weight: 700;
+      letter-spacing: -0.02em; color: var(--accent);
+    }
+
+    /* TIMELINE */
+    .days { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .day { border-top: 1px solid var(--line); padding-top: 22px; }
+    .day-num { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 10px; }
+    .day-title { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+    .day p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+    .day p + p { margin-top: 8px; }
+
+    /* TEAM */
+    .team-photo { width: 100%; border-radius: 12px; display: block; margin-bottom: 24px; }
+    .team-caption { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 50px; }
+    .team-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; }
+    .team-row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+      border-top: 1px solid var(--line); padding-top: 14px;
+    }
+    .team-row-name { font-size: 15px; font-weight: 600; }
+    .team-row-role { font-size: 13px; color: var(--muted); text-align: right; }
+
+    @media (max-width: 700px) {
+      .pair { grid-template-columns: 1fr; gap: 32px; }
+      .days { grid-template-columns: 1fr; gap: 32px; }
+      .stats { grid-template-columns: 1fr; gap: 32px; }
+      .benefits { grid-template-columns: 1fr; gap: 32px; }
+      .persona { grid-template-columns: 1fr; }
+      .team-list { grid-template-columns: 1fr; }
+      .section { padding: 60px 24px; }
+    }
+
+    /* LANGUAGE */
+    html.lang-en .t-fr { display: none !important; }
+    html.lang-fr .t-en { display: none !important; }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-back">&larr; Portfolio</a>
+    <div class="nav-links">
+      <button class="nav-link" data-lang="fr">FR</button>
+      <button class="nav-link" data-lang="en">EN</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">04 &middot; Hackathon &middot; 2026</p>
+    <h1 class="hero-title">Crosslines</h1>
+    <p class="hero-desc"><span class="t-fr">L&rsquo;application qui facilite la collaboration entre les clients et les entreprises.</span><span class="t-en">The app that makes collaboration between clients and companies easier.</span></p>
+    <p class="jury-line"><span class="t-fr">Prix du jury</span><span class="t-en">Jury Prize</span></p>
+    <div class="cta-row">
+      <a href="https://www.figma.com/design/twe0jCayR3jisc5VOXSdbq/Hackathon?node-id=48-2&p=f&t=nAIhh0At0pOmjzRy-0" target="_blank" rel="noopener" class="btn btn--solid"><span class="t-fr">Voir la d&eacute;mo</span><span class="t-en">View demo</span></a>
+      <a href="https://www.figma.com/proto/twe0jCayR3jisc5VOXSdbq/Hackathon?node-id=164-1749&t=jdA5iwjYpHFglGFe-0&scaling=contain&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=164%3A1749" target="_blank" rel="noopener" class="btn btn--ghost"><span class="t-fr">Voir la pr&eacute;sentation</span><span class="t-en">View pitch deck</span></a>
+    </div>
+    <div class="wrap">
+      <img src="assets/Hackathon_mockup.svg" alt="Crosslines dashboard" class="mockup-img" />
+    </div>
+  </section>
+
+  <!-- CONSTAT -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">Constat</span><span class="t-en">Observation</span></p>
+      <h2 class="section-title"><span class="t-fr">Un probl&egrave;me r&eacute;pandu</span><span class="t-en">A Widespread Problem</span></h2>
+      <p class="section-desc"><span class="t-fr">La gestion de projet est aujourd&rsquo;hui essentielle pour fluidifier les relations entre les agences web et leurs clients.</span><span class="t-en">Project management is now essential to smooth the relationship between web agencies and their clients.</span></p>
+      <div class="stats">
+        <div class="stat">
+          <p class="stat-num">66%</p>
+          <p><span class="t-fr">des projets web ou de refonte en France rencontrent des retards ou des d&eacute;passements (budget, d&eacute;lai ou p&eacute;rim&egrave;tre).</span><span class="t-en">of web or redesign projects in France run into delays or overruns (budget, timeline or scope).</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">40%</p>
+          <p><span class="t-fr">des retards de projet sont li&eacute;s &agrave; des probl&egrave;mes de communication et de validation client.</span><span class="t-en">of project delays are tied to communication and client-validation issues.</span></p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">70%</p>
+          <p><span class="t-fr">des probl&egrave;mes dans les projets digitaux viennent d&rsquo;une mauvaise gestion de l&rsquo;information (fichiers dispers&eacute;s, versions multiples, retours non structur&eacute;s).</span><span class="t-en">of digital project issues come from poor information management (scattered files, multiple versions, unstructured feedback).</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONA -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Persona</p>
+      <h2 class="section-title"><span class="t-fr">Marc, 42 ans</span><span class="t-en">Marc, 42</span></h2>
+      <div class="persona">
+        <img src="assets/Marc-avatar.png" alt="Marc" class="persona-avatar" />
+        <div>
+          <p class="persona-name">Marc</p>
+          <p class="persona-role"><span class="t-fr">Responsable marketing, Studio Galbe</span><span class="t-en">Marketing Manager, Studio Galbe</span></p>
+          <h4><span class="t-fr">Qui est-il</span><span class="t-en">Who he is</span></h4>
+          <p><span class="t-fr">Responsable marketing du Studio Galbe, sp&eacute;cialis&eacute; dans l&rsquo;&eacute;dition de meubles contemporains.</span><span class="t-en">Marketing manager at Studio Galbe, a contemporary furniture editor.</span></p>
+          <h4><span class="t-fr">Son objectif</span><span class="t-en">His goal</span></h4>
+          <p><span class="t-fr">G&eacute;rer la refonte du site web de son entreprise, en plus de ses missions quotidiennes.</span><span class="t-en">Manage his company's website redesign, on top of his day-to-day work.</span></p>
+          <h4><span class="t-fr">Ses frustrations</span><span class="t-en">His frustrations</span></h4>
+          <ul>
+            <li><span class="t-fr">Surcharge de travail</span><span class="t-en">Workload overload</span></li>
+            <li><span class="t-fr">&Eacute;parpillement des informations</span><span class="t-en">Scattered information</span></li>
+            <li><span class="t-fr">Contenus de qualit&eacute; insuffisante</span><span class="t-en">Content that isn't good enough</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMATIQUE -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">Probl&eacute;matique</span><span class="t-en">Problem Statement</span></p>
+      <p class="quote-box">
+        <span class="t-fr">Comment pourrait-on aider Marc &agrave; centraliser les contenus et valider les &eacute;tapes de la refonte sans surcharger son quotidien de responsable marketing unique&nbsp;?</span>
+        <span class="t-en">How can we help Marc centralize content and validate redesign milestones without overloading his day-to-day as the sole marketing manager?</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">Notre solution</span><span class="t-en">Our Solution</span></p>
+      <h2 class="section-title">Crosslines</h2>
+      <div class="pair">
+        <div>
+          <h3><span class="t-fr">Le principe</span><span class="t-en">The Principle</span></h3>
+          <p><span class="t-fr">Une plateforme web simple d&rsquo;utilisation pour &eacute;viter &agrave; Marc de se perdre dans les informations. Il d&eacute;pose ses contenus et commente les maquettes en ligne, directement l&agrave; o&ugrave; les &eacute;l&eacute;ments apparaissent.</span><span class="t-en">A web platform simple enough that Marc never gets lost in information. He uploads his content and comments on mockups online, right where the elements appear.</span></p>
+        </div>
+        <div>
+          <h3><span class="t-fr">Le r&eacute;sultat</span><span class="t-en">The Result</span></h3>
+          <p><span class="t-fr">Fluidit&eacute; des &eacute;changes avec l&rsquo;agence. Marc garde le contr&ocirc;le total sur son projet.</span><span class="t-en">Smoother exchanges with the agency. Marc keeps full control over his project.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICES -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">Crosslines, c&rsquo;est</span><span class="t-en">Crosslines Is</span></p>
+      <div class="benefits">
+        <div class="benefit">
+          <p class="benefit-title"><span class="t-fr">Un gain de temps important</span><span class="t-en">A real time saver</span></p>
+          <ul>
+            <li><span class="t-fr">Espace de travail centralis&eacute;</span><span class="t-en">Centralized workspace</span></li>
+            <li><span class="t-fr">Gestion simplifi&eacute;e</span><span class="t-en">Simplified management</span></li>
+            <li><span class="t-fr">Fichiers h&eacute;t&eacute;rog&egrave;nes harmonis&eacute;s</span><span class="t-en">Mixed file types unified</span></li>
+          </ul>
+        </div>
+        <div class="benefit">
+          <p class="benefit-title"><span class="t-fr">Validations en quelques clics</span><span class="t-en">Validation in a few clicks</span></p>
+          <ul>
+            <li><span class="t-fr">Publication en un clic</span><span class="t-en">One-click publishing</span></li>
+            <li><span class="t-fr">Pas d&rsquo;interm&eacute;diaire</span><span class="t-en">No middleman</span></li>
+            <li><span class="t-fr">Validation rapide</span><span class="t-en">Fast validation</span></li>
+          </ul>
+        </div>
+        <div class="benefit">
+          <p class="benefit-title"><span class="t-fr">Plus de flexibilit&eacute;</span><span class="t-en">More flexibility</span></p>
+          <ul>
+            <li><span class="t-fr">Autonomie totale</span><span class="t-en">Full autonomy</span></li>
+            <li><span class="t-fr">Prise en main libre</span><span class="t-en">Learn at your own pace</span></li>
+            <li><span class="t-fr">Ajustements simplifi&eacute;s</span><span class="t-en">Easy adjustments</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="closing-line"><span class="t-fr">Simplicit&eacute;, Clart&eacute;, Rapidit&eacute; et accompagnement.</span><span class="t-en">Simplicity, clarity, speed and support.</span></p>
+    </div>
+  </section>
+
+  <!-- AVENIR -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">L&rsquo;avenir</span><span class="t-en">What's Next</span></p>
+      <h2 class="section-title"><span class="t-fr">Une plateforme collaborative et compl&egrave;te</span><span class="t-en">A Complete, Collaborative Platform</span></h2>
+      <p class="section-desc" style="margin-bottom:0;"><span class="t-fr">Prochaine &eacute;tape&nbsp;: l&rsquo;int&eacute;gration de l&rsquo;intelligence artificielle.</span><span class="t-en">Next step: integrating artificial intelligence.</span></p>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">Le format</span><span class="t-en">The Format</span></p>
+      <h2 class="section-title"><span class="t-fr">3 jours, une &eacute;quipe</span><span class="t-en">3 Days, One Team</span></h2>
+      <div class="days">
+        <div class="day">
+          <p class="day-num">JOUR 01</p>
+          <h3 class="day-title"><span class="t-fr">Cadrage</span><span class="t-en">Framing</span></h3>
+          <p><span class="t-fr">D&eacute;couverte du sujet, r&eacute;partition des r&ocirc;les, premi&egrave;res recherches.</span><span class="t-en">Brief revealed, roles split, initial research.</span></p>
+          <p><span class="t-fr">Apr&egrave;s-midi&nbsp;: premi&egrave;res avanc&eacute;es.</span><span class="t-en">Afternoon: first progress.</span></p>
+        </div>
+        <div class="day">
+          <p class="day-num">JOUR 02</p>
+          <h3 class="day-title"><span class="t-fr">Production</span><span class="t-en">Production</span></h3>
+          <p><span class="t-fr">Journ&eacute;e enti&egrave;re&nbsp;: design de la plateforme, contenu, structure du pitch.</span><span class="t-en">A full day: platform design, content, pitch structure.</span></p>
+        </div>
+        <div class="day">
+          <p class="day-num">JOUR 03</p>
+          <h3 class="day-title">Pitch</h3>
+          <p><span class="t-fr">Finitions le matin, pr&eacute;sentation devant le jury l&rsquo;apr&egrave;s-midi.</span><span class="t-en">Final polish in the morning, jury presentation in the afternoon.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow"><span class="t-fr">L&rsquo;&eacute;quipe</span><span class="t-en">The Team</span></p>
+      <img src="assets/hackathon.jpg" alt="Team photo" class="team-photo" />
+      <p class="team-caption"><span class="t-fr">L&rsquo;&eacute;quipe avec le prix du jury.</span><span class="t-en">The team with the jury prize.</span></p>
+      <div class="team-list">
+        <div class="team-row"><span class="team-row-name">Hulya Zorlu</span><span class="team-row-role"><span class="t-fr">Cheffe de projet</span><span class="t-en">Project Lead</span></span></div>
+        <div class="team-row"><span class="team-row-name">Abira Kajendran</span><span class="team-row-role">Designer</span></div>
+        <div class="team-row"><span class="team-row-name">Mathieu Janmot</span><span class="team-row-role">Designer</span></div>
+        <div class="team-row"><span class="team-row-name">Yasmina Ouahid</span><span class="team-row-role"><span class="t-fr">Architecte des exp&eacute;riences visuelles</span><span class="t-en">Visual Experience Architect</span></span></div>
+        <div class="team-row"><span class="team-row-name">Alicia Ramanantsalama</span><span class="team-row-role"><span class="t-fr">Responsable documentation</span><span class="t-en">Documentation Lead</span></span></div>
+        <div class="team-row"><span class="team-row-name">Tarik Anseur</span><span class="team-row-role">Data Analyst</span></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var lang = localStorage.getItem('lang') || 'fr';
+      document.documentElement.className = 'lang-' + lang;
+      function applyLang(l) {
+        localStorage.setItem('lang', l);
+        document.documentElement.className = 'lang-' + l;
+      }
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-lang]');
+        if (btn) applyLang(btn.dataset.lang);
+      });
+    })();
+  </script>
+
+</body>
+</html>

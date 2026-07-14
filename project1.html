@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="fr" class="lang-fr">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function(){var l=localStorage.getItem('lang')||'fr';document.documentElement.className='lang-'+l;})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wevent - Case Study UX/UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: montrealbook;
+      font-display: swap;
+      src: url(assets/fonts/NeueMontreal-Regular.woff2) format("woff2"),
+           url(assets/fonts/NeueMontreal-Regular.woff) format("woff");
+    }
+
+    :root {
+      --bg: #F8F6F2;
+      --fg: #0A0A0A;
+      --mg: 30px;
+      --gg: 24px;
+      --col-unit: calc((100vw - 2 * var(--mg) + var(--gg)) / 12);
+      --rule: rgba(10,10,10,0.1);
+      --muted: rgba(10,10,10,0.42);
+      --alt-bg: #EDEAE5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 10px; scroll-behavior: smooth; }
+    body {
+      font-family: montrealbook, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: clip;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 var(--mg);
+      height: 4.8rem;
+      background: var(--fg);
+    }
+    .nav-left { display: flex; align-items: center; }
+    .nav-back {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.2rem;
+      color: rgba(248,246,242,0.55);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #F8F6F2; }
+    .nav-figma {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: #F8F6F2;
+      text-decoration: none;
+      border: 1px solid rgba(248,246,242,0.3);
+      padding: 2px 8px 1px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-figma:hover { background: #F8F6F2; color: var(--fg); }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--bg);
+      padding-top: 4.8rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+      padding-left: var(--mg);
+      padding-right: var(--mg);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .hero::before { display: none; }
+    .hero-left {
+      grid-column: 2 / 8;
+      padding: 7rem 0 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-right {
+      grid-column: 9 / 13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7rem 0 6rem;
+    }
+    .hero-mockup {
+      max-width: 320px;
+      object-fit: contain;
+    }
+    .hero-title {
+      font-family: montrealbook, sans-serif;
+      font-size: clamp(7rem, 11vw, 15rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 0.88;
+      color: var(--fg);
+      margin-bottom: 3.6rem;
+    }
+    .hero-desc {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.9rem;
+      color: var(--fg);
+      line-height: 1.35;
+      max-width: 48rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 4rem;
+    }
+    .hero-team { margin-bottom: 4rem; }
+    .hero-team-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 1.4rem;
+    }
+    .hero-team-members {
+      display: flex;
+      gap: 3.2rem;
+      flex-wrap: wrap;
+    }
+    .hero-member-name {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.45rem;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+    .hero-member-role {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-stat-num {
+      font-family: montrealbook, sans-serif;
+      font-size: 4.2rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .hero-stat-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTIONS ─────────────────────────────────────────── */
+    .section {
+      padding: 8rem var(--mg);
+      border-top: 1px solid var(--rule);
+      background: var(--bg);
+      position: relative;
+    }
+    .section--alt {
+      background: var(--alt-bg);
+      --rule: rgba(10,10,10,0.09);
+    }
+    .section--fullimg {
+      padding: 0;
+      border-top: 1px solid var(--rule);
+      background: transparent;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+      align-items: end;
+      margin-bottom: 5.6rem;
+    }
+    .section-number {
+      grid-column: 1 / 2;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      padding-bottom: 0.4rem;
+    }
+    .section-title {
+      grid-column: 2 / 8;
+      font-family: montrealbook, sans-serif;
+      font-size: clamp(3rem, 3.8vw, 5.6rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 0.93;
+      color: var(--fg);
+    }
+    .section-sub {
+      grid-column: 9 / 13;
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.65;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── S01 CONTEXTE ─────────────────────────────────────── */
+    .s01-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+    }
+    .s01-grid > div:nth-child(1) { grid-column: 2 / 5; }
+    .s01-grid > div:nth-child(2) { grid-column: 5 / 9; }
+    .s01-grid > div:nth-child(3) { grid-column: 9 / 13; }
+
+    .col-heading {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .col-heading-2 {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 3.6rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .col-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.2rem;
+      color: var(--fg);
+      line-height: 1.72;
+      letter-spacing: 0.01em;
+    }
+    .cibles-list { list-style: none; margin-top: 0.4rem; }
+    .cibles-list li {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.2rem;
+      color: var(--fg);
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      letter-spacing: 0.01em;
+    }
+    .cibles-list li:last-child { border-bottom: none; }
+    .cibles-list li::before { display: none; }
+    .livrables-list { list-style: none; }
+    .livrable-item {
+      padding: 1.1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.6rem;
+    }
+    .livrable-name {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.4rem;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+    .livrable-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── S02 PERSONAS ─────────────────────────────────────── */
+    .personas-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+    }
+    .persona-card {
+      grid-column: span 4;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 0;
+      padding: 3.2rem 2.8rem;
+    }
+    .persona-card--selected {
+      background: var(--fg);
+      border-color: var(--fg);
+    }
+    .persona-badge {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.4rem;
+    }
+    .persona-card--selected .persona-badge { color: rgba(248,246,242,0.4); }
+    .persona-photo {
+      width: 54px;
+      height: 54px;
+      border-radius: 0;
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+      background: var(--rule);
+    }
+    .persona-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .persona-name {
+      font-family: montrealbook, sans-serif;
+      font-size: 2.1rem;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .persona-card--selected .persona-name { color: #F8F6F2; }
+    .persona-role {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      letter-spacing: 0.02em;
+    }
+    .persona-card--selected .persona-role { color: rgba(248,246,242,0.45); }
+    .persona-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: rgba(10,10,10,0.7);
+      line-height: 1.68;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .persona-card--selected .persona-desc {
+      color: rgba(248,246,242,0.62);
+      border-bottom-color: rgba(248,246,242,0.1);
+    }
+    .persona-sublabel {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 1.4rem;
+      margin-bottom: 0.7rem;
+    }
+    .persona-card--selected .persona-sublabel { color: rgba(248,246,242,0.38); }
+    .persona-items { display: flex; flex-direction: column; }
+    .persona-item {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: var(--fg);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      letter-spacing: 0.01em;
+    }
+    .persona-item:last-child { border-bottom: none; }
+    .persona-item::before { display: none; }
+    .persona-card--selected .persona-item {
+      color: rgba(248,246,242,0.82);
+      border-bottom-color: rgba(248,246,242,0.08);
+    }
+
+    /* ── S03 PROCESSUS TIMELINE ───────────────────────────── */
+    .tl-phases {
+      display: flex;
+      gap: 2.4rem;
+      margin-bottom: 4.8rem;
+      flex-wrap: wrap;
+    }
+    .tl-phase {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 0;
+      border-radius: 0;
+      text-transform: uppercase;
+      border: none;
+    }
+    .tl-phase--1 { color: var(--fg); border-bottom: 2px solid var(--fg); }
+    .tl-phase--2 { color: rgba(10,10,10,0.62); border-bottom: 2px solid rgba(10,10,10,0.62); }
+    .tl-phase--3 { color: rgba(10,10,10,0.38); border-bottom: 2px solid rgba(10,10,10,0.38); }
+
+    .tl-overflow { overflow-x: auto; padding-bottom: 1.6rem; }
+    .tl-grid {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      min-width: 1100px;
+      position: relative;
+    }
+    .tl-horiz-line {
+      position: absolute;
+      left: 0; right: 0;
+      top: 184px;
+      height: 1px;
+      background: var(--rule);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    .tl-col { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+    .tl-col--above { justify-content: flex-start; }
+    .tl-col--above .tl-spacer { height: 180px; flex-shrink: 0; }
+    .tl-col--below { justify-content: flex-start; }
+    .tl-col--below .tl-spacer { height: 180px; flex-shrink: 0; }
+
+    .tl-card {
+      width: 88.462px;
+      height: 160px;
+      border-radius: 0;
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      padding: 1.2rem 0.9rem 0.8rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+    .tl-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .tl-card--p1 { border-color: var(--fg); }
+    .tl-card--p1::after { background: var(--fg); }
+    .tl-card--p2 { border-color: rgba(10,10,10,0.55); }
+    .tl-card--p2::after { background: rgba(10,10,10,0.55); }
+    .tl-card--p3 { border-color: rgba(10,10,10,0.32); }
+    .tl-card--p3::after { background: rgba(10,10,10,0.32); }
+
+    .tl-dot--p1 { background: #FF6B35; }
+    .tl-dot--p2 { background: #FF6B35; }
+    .tl-dot--p3 { background: #FF6B35; }
+
+    .tl-conn { width: 1px; height: 20px; background: var(--rule); flex-shrink: 0; }
+    .tl-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rule); flex-shrink: 0; z-index: 2; }
+    .tl-step-num {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #FF6B35;
+      letter-spacing: 0.08em;
+    }
+    .tl-card--p1 .tl-step-num { color: #FF6B35; }
+    .tl-card--p2 .tl-step-num { color: #FF6B35; }
+    .tl-card--p3 .tl-step-num { color: #FF6B35; }
+    .tl-step-title {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.02rem;
+      color: var(--fg);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    .tl-step-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.86rem;
+      color: rgba(10,10,10,0.82);
+      line-height: 1.55;
+    }
+
+    /* ── S04 USER FLOW ────────────────────────────────────── */
+    .uf-scroll { overflow-x: auto; padding: 8rem 0 16rem; display: flex; justify-content: center; }
+    .uf-flow { display: flex; align-items: center; gap: 0; width: max-content; }
+
+    .uf-home-wrap { position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .uf-thomas-float { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+    .uf-vc-s { width: 1px; height: 10px; background: var(--fg); flex-shrink: 0; }
+    .uf-vc-lbl { font-family: 'Courier Prime', monospace; font-size: 0.88rem; color: var(--muted); margin: 0.3rem 0; white-space: nowrap; }
+
+    .uf-rappel-wrap { position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .uf-below-float { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+
+    .uf-hc { width: 36px; height: 1px; background: var(--fg); flex-shrink: 0; position: relative; }
+    .uf-hc::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); border-top: 3px solid transparent; border-bottom: 3px solid transparent; border-left: 5px solid var(--fg); }
+    .uf-hc-lbl { position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); font-family: 'Courier Prime', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+    .uf-vc { width: 1px; height: 28px; background: var(--fg); flex-shrink: 0; }
+
+    .uf-node { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; flex-shrink: 0; border-radius: 0; }
+    .uf-node--user { width: 120px; height: 50px; background: var(--fg); padding: 0.8rem; }
+    .uf-nm { font-family: montrealbook, sans-serif; font-size: 1.25rem; font-weight: 400; color: #F8F6F2; letter-spacing: -0.01em; }
+    .uf-sb { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: rgba(248,246,242,0.45); }
+    .uf-node--screen { width: 120px; height: 50px; border: 1px solid var(--fg); background: var(--bg); font-family: 'Courier Prime', monospace; font-size: 0.95rem; font-weight: 700; color: var(--fg); letter-spacing: 0.08em; }
+    .uf-node--cat { width: 140px; height: 60px; border: 1px solid var(--fg); background: var(--bg); font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--fg); padding: 0 1.2rem; }
+
+    .uf-creer-wrap { position: relative; flex-shrink: 0; }
+    .uf-rejoindre-below { position: absolute; top: calc(100% + 6px); left: 0; }
+    .uf-fork-a { width: 140px; height: 30px; border-radius: 0; border: 1px solid var(--fg); background: var(--fg); display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.88rem; font-style: normal; color: #F8F6F2; }
+    .uf-fork-b { width: 140px; height: 40px; border-radius: 0; border: 1px solid var(--rule); background: var(--bg); display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.88rem; font-style: normal; color: var(--muted); }
+    .uf-node--pro { width: 140px; height: 60px; border: 1px solid var(--fg); background: var(--bg); font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--fg); padding: 0.8rem 1.2rem; gap: 0.3rem; }
+    .uf-node--pro .uf-sb { font-size: 0.88rem; font-family: 'Courier Prime', monospace; color: var(--muted); }
+
+    .uf-node--invite { width: 210px; height: 200px; border: 1px solid var(--fg); background: var(--bg); border-radius: 0; padding: 1.6rem; align-items: flex-start; justify-content: flex-start; gap: 0; }
+    .uf-invite-title { font-family: 'Courier Prime', monospace; font-size: 0.82rem; font-weight: 700; color: var(--fg); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .uf-invite-item { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--fg); line-height: 1.72; }
+
+    .uf-node--rappel { width: 150px; height: 90px; border: 1px solid var(--fg); background: var(--bg); border-radius: 0; padding: 1.2rem; align-items: flex-start; justify-content: flex-start; gap: 0; }
+    .uf-rappel-t { font-family: montrealbook, sans-serif; font-size: 1.2rem; color: var(--fg); margin-bottom: 0.7rem; letter-spacing: -0.01em; }
+    .uf-rappel-i { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--muted); line-height: 1.72; }
+
+    .uf-node--checkin { width: 150px; height: 54px; border: 1px solid var(--fg); background: var(--bg); border-radius: 0; font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--fg); }
+    .uf-node--feedback { width: 150px; height: 54px; border: 1px solid var(--rule); background: rgba(10,10,10,0.04); border-radius: 0; font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--fg); }
+
+    .uf-legend { display: flex; gap: 2.4rem; align-items: center; flex-wrap: wrap; margin-top: 3.2rem; }
+    .uf-legend-title { font-family: 'Courier Prime', monospace; font-size: 0.85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+    .uf-legend-item { display: flex; align-items: center; gap: 0.8rem; font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--muted); }
+    .uf-legend-dot { width: 10px; height: 10px; border-radius: 0; flex-shrink: 0; }
+
+    /* ── IMAGES FULL BLEED ────────────────────────────────── */
+    .wf-fullimg { width: 100%; display: block; }
+
+    /* ── TESTS S06 / S08 ──────────────────────────────────── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+    }
+    .test-grid > div:first-child { grid-column: 2 / 7; }
+    .test-grid > div:last-child  { grid-column: 8 / 13; }
+
+    .test-col-title {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.6rem;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .problems-list { list-style: none; }
+    .problem-item { display: flex; gap: 1.6rem; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); align-items: flex-start; }
+    .problem-item:last-child { border-bottom: none; }
+    .problem-screen {
+      flex-shrink: 0;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      padding-top: 0.2rem;
+      min-width: 52px;
+      background: none;
+      border-radius: 0;
+    }
+    .problem-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.15rem;
+      color: var(--fg);
+      line-height: 1.58;
+    }
+    .quote-block {
+      border-left: 2px solid var(--fg);
+      padding: 1.2rem 1.8rem;
+      margin-bottom: 1.8rem;
+      background: transparent;
+      border-radius: 0;
+    }
+    .section--alt .quote-block { background: transparent; }
+    .quote-text {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.4rem;
+      color: var(--fg);
+      line-height: 1.52;
+      font-style: italic;
+      letter-spacing: -0.01em;
+    }
+    .quote-author {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      letter-spacing: 0.07em;
+      font-style: normal;
+    }
+    .decisions-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 3.2rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .decisions-list { list-style: none; }
+    .decisions-list li { font-family: 'Courier Prime', monospace; font-size: 1.15rem; color: var(--fg); padding: 0.8rem 0; border-bottom: 1px solid var(--rule); letter-spacing: 0.01em; }
+    .decisions-list li:last-child { border-bottom: none; }
+    .decisions-list li::before { display: none; }
+
+    /* ── S09 DESIGN SYSTEM ────────────────────────────────── */
+    .ds-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+    }
+    .ds-grid > div:nth-child(1) { grid-column: 2 / 5; }
+    .ds-grid > div:nth-child(2) { grid-column: 5 / 9; }
+    .ds-grid > div:nth-child(3) { grid-column: 9 / 13; }
+
+    .ds-col-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .palette { display: flex; flex-direction: column; gap: 1.4rem; }
+    .swatch { display: flex; align-items: center; gap: 1.6rem; }
+    .swatch-color { width: 40px; height: 40px; border-radius: 0; flex-shrink: 0; border: 1px solid rgba(10,10,10,0.08); }
+    .swatch-name { font-family: montrealbook, sans-serif; font-size: 1.4rem; color: var(--fg); letter-spacing: -0.01em; }
+    .swatch-hex { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--muted); }
+    .swatch-usage { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--muted); }
+
+    .typo-label { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--muted); margin-bottom: 1.6rem; letter-spacing: 0.04em; }
+    .typo-list { display: flex; flex-direction: column; gap: 1px; }
+    .typo-item { padding: 1.4rem 1.6rem; background: rgba(10,10,10,0.03); border: 1px solid var(--rule); border-radius: 0; }
+    .typo-spec { font-family: 'Courier Prime', monospace; font-size: 0.88rem; color: var(--muted); margin-top: 0.5rem; }
+
+    .principles { display: flex; flex-direction: column; }
+    .principle { padding: 1.3rem 0; border-bottom: 1px solid var(--rule); }
+    .principle:first-child { border-top: 1px solid var(--rule); }
+    .principle:last-child { border-bottom: none; }
+    .principle-name { font-family: montrealbook, sans-serif; font-size: 1.5rem; color: var(--fg); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+    .principle-desc { font-family: 'Courier Prime', monospace; font-size: 1rem; color: var(--muted); }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    .footer {
+      background: #0A0A0A;
+      padding: 3.2rem var(--mg);
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+      align-items: center;
+      border-top: 1px solid rgba(248,246,242,0.08);
+    }
+    .footer span {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: rgba(248,246,242,0.42);
+      letter-spacing: 0.04em;
+    }
+    .footer span:nth-child(1) { grid-column: 1 / 5; }
+    .footer span:nth-child(2) { grid-column: 5 / 9; }
+    .footer span:nth-child(3) { grid-column: 9 / 13; text-align: right; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    /* ── S10 METRICS ─────────────────────────────────────── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--gg);
+    }
+    .metric-card {
+      grid-column: span 4;
+      padding: 4rem 3.2rem;
+      border: 1px solid var(--rule);
+    }
+    .metric-card--accent {
+      background: var(--fg);
+      border-color: var(--fg);
+    }
+    .metric-num {
+      font-family: montrealbook, sans-serif;
+      font-size: 7.2rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 1.6rem;
+    }
+    .metric-card--accent .metric-num { color: var(--bg); }
+    .metric-label {
+      font-family: montrealbook, sans-serif;
+      font-size: 1.4rem;
+      color: var(--fg);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+    .metric-card--accent .metric-label { color: var(--bg); }
+    .metric-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+    .metric-card--accent .metric-desc { color: rgba(248,246,242,0.5); }
+
+    @media (max-width: 900px) {
+      .hero {
+        display: flex;
+        flex-direction: column;
+        padding: 8rem var(--mg) 5rem;
+        min-height: auto;
+      }
+      .hero-right { justify-content: flex-start; }
+      .hero-title { font-size: clamp(5.5rem, 15vw, 9rem); }
+      .section-header { display: block; }
+      .section-title { font-size: 3.2rem; margin-top: 1.2rem; }
+      .section-sub { margin-top: 1.6rem; }
+      .s01-grid,
+      .personas-grid,
+      .ds-grid { display: flex; flex-direction: column; gap: 3.2rem; }
+      .test-grid { display: flex; flex-direction: column; gap: 3.6rem; }
+      .metrics-grid { display: flex; flex-direction: column; gap: 0; }
+      .footer { display: flex; flex-direction: column; gap: 1rem; text-align: left !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* LANGUAGE */
+    html.lang-en .t-fr { display: none !important; }
+    html.lang-fr .t-en { display: none !important; }
+    .lang-toggle { display:flex; align-items:center; gap:0.3rem; }
+    .lang-btn { font-family:'Courier Prime',monospace; font-size:1.4rem !important; letter-spacing:0.1em; color:rgba(248,246,242,0.35); background:none; border:none; cursor:pointer; padding:0; transition:color 0.2s; }
+    .lang-btn:hover { color:#F8F6F2; }
+    .lang-btn.active { color:#F8F6F2; }
+    .lang-sep { font-family:'Courier Prime',monospace; font-size:1.4rem !important; color:rgba(248,246,242,0.15); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-back">&larr; Portfolio</a>
+    </div>
+    <div class="lang-toggle" style="position:absolute;left:50%;transform:translateX(-50%);">
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <a href="https://www.figma.com/design/S3eB9KgplmEaujiE1QdqTI/Wevent-app?node-id=48-2&p=f&t=UDjU95QpPKzphkHr-0"
+       target="_blank" rel="noopener" class="nav-figma">Figma &rarr;</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Wevent</h1>
+      <p class="hero-desc"><span class="t-fr">Application mobile pour cr&eacute;er, organiser et partager des &eacute;v&eacute;nements.</span><span class="t-en">Mobile app to create, organize and share events.</span></p>
+      <p class="hero-tag"><span class="t-fr">iOS &middot; Projet acad&eacute;mique &middot; 2026</span><span class="t-en">iOS &middot; Academic project &middot; 2026</span></p>
+      <div class="hero-team">
+        <p class="hero-team-label"><span class="t-fr">&Eacute;quipe</span><span class="t-en">Team</span></p>
+        <div class="hero-team-members">
+          <div>
+            <p class="hero-member-name">Hulya Z.</p>
+            <p class="hero-member-role"><span class="t-fr">UX/UI &middot; Design &amp; Recherche</span><span class="t-en">UX/UI &middot; Design &amp; Research</span></p>
+          </div>
+          <div>
+            <p class="hero-member-name">Abira K.</p>
+            <p class="hero-member-role"><span class="t-fr">UX/UI &middot; Design &amp; Recherche</span><span class="t-en">UX/UI &middot; Design &amp; Research</span></p>
+          </div>
+          <div>
+            <p class="hero-member-name">Maxime L.</p>
+            <p class="hero-member-role"><span class="t-fr">Prototypage &amp; Impl&eacute;mentation technique</span><span class="t-en">Prototyping &amp; Technical implementation</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div><p class="hero-stat-num">13</p><p class="hero-stat-label"><span class="t-fr">&eacute;tapes</span><span class="t-en">steps</span></p></div>
+        <div><p class="hero-stat-num">20</p><p class="hero-stat-label"><span class="t-fr">&eacute;crans</span><span class="t-en">screens</span></p></div>
+        <div><p class="hero-stat-num">5</p><p class="hero-stat-label">interviews</p></div>
+        <div><p class="hero-stat-num">2</p><p class="hero-stat-label">rounds</p></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="assets/weventmockup.png" alt="Wevent App Mockup" class="hero-mockup" />
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-number">01</p>
+      <h2 class="section-title"><span class="t-fr">Contexte &amp; Probl&egrave;me</span><span class="t-en">Context &amp; Problem Statement</span></h2>
+    </div>
+    <div class="s01-grid">
+      <div>
+        <h3 class="col-heading"><span class="t-fr">Pourquoi Wevent ?</span><span class="t-en">Why Wevent?</span></h3>
+        <p class="col-text"><span class="t-fr">Les organisateurs jonglent entre 4 &agrave; 6 outils diff&eacute;rents : WhatsApp, Excel, Doodle, Uber... Aucune app unifi&eacute;e ne couvre l&rsquo;ensemble du parcours : lieu, invit&eacute;s, budget, transport et communication.</span><span class="t-en">Event organizers juggle between 4 to 6 different tools: WhatsApp, Excel, Doodle, Uber... No unified app covers the full journey: venue, guests, budget, transport and communication.</span></p>
+        <h3 class="col-heading-2"><span class="t-fr">Probl&eacute;matique</span><span class="t-en">Problem Statement</span></h3>
+        <p class="col-text"><span class="t-fr">Comment aider Thomas &agrave; cr&eacute;er un event pop-up avec une application fluide ?</span><span class="t-en">How to help Thomas create a pop-up event with a seamless application?</span></p>
+      </div>
+      <div>
+        <h3 class="col-heading"><span class="t-fr">Entretien client</span><span class="t-en">Client Interview</span></h3>
+        <p class="col-text"><span class="t-fr">M. Nicrole, CEO - 14 ans d&rsquo;exp&eacute;rience dans l&rsquo;&eacute;v&eacute;nementiel. Besoin exprim&eacute; : une app connect&eacute;e &agrave; WhatsApp, avec CB int&eacute;gr&eacute;e, simple d&rsquo;utilisation, disponible sur mobile.</span><span class="t-en">M. Nicrole, CEO - 14 years of experience in event management. Expressed need: an app connected to WhatsApp, with integrated payment, easy to use, available on mobile.</span></p>
+        <h3 class="col-heading-2"><span class="t-fr">Cibles</span><span class="t-en">Target Users</span></h3>
+        <ul class="cibles-list">
+          <li><span class="t-fr">Professionnels de l&rsquo;&eacute;v&eacute;nementiel</span><span class="t-en">Event professionals</span></li>
+          <li><span class="t-fr">Familles &amp; groupes d&rsquo;amis</span><span class="t-en">Families &amp; friend groups</span></li>
+          <li><span class="t-fr">Participants actifs 20 - 40 ans</span><span class="t-en">Active participants 20 - 40 years old</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="col-heading"><span class="t-fr">Livrables</span><span class="t-en">Deliverables</span></h3>
+        <ul class="livrables-list">
+          <li class="livrable-item"><p class="livrable-name"><span class="t-fr">13 &eacute;tapes</span><span class="t-en">13 steps</span></p><p class="livrable-desc"><span class="t-fr">De la recherche au pitch</span><span class="t-en">From research to pitch</span></p></li>
+          <li class="livrable-item"><p class="livrable-name">20 wireframes</p><p class="livrable-desc"><span class="t-fr">Structure &amp; flux annot&eacute;s</span><span class="t-en">Structure &amp; annotated flows</span></p></li>
+          <li class="livrable-item"><p class="livrable-name"><span class="t-fr">20 &eacute;crans Mid-Fi</span><span class="t-en">20 Mid-Fi screens</span></p><p class="livrable-desc">Design system Sunset</p></li>
+          <li class="livrable-item"><p class="livrable-name">90+ interactions</p><p class="livrable-desc"><span class="t-fr">Prototype interactif</span><span class="t-en">Interactive prototype</span></p></li>
+          <li class="livrable-item"><p class="livrable-name"><span class="t-fr">2 rounds de tests</span><span class="t-en">2 test rounds</span></p><p class="livrable-desc"><span class="t-fr">3 participants chacun</span><span class="t-en">3 participants each</span></p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section section--alt">
+    <div class="section-header">
+      <p class="section-number">02</p>
+      <h2 class="section-title">Personas</h2>
+      <p class="section-sub"><span class="t-fr">3 personas construits. Thomas Carrel retenu comme persona principal.</span><span class="t-en">3 personas built. Thomas Carrel selected as primary persona.</span></p>
+    </div>
+    <div class="personas-grid">
+
+      <div class="persona-card">
+        <p class="persona-badge">Persona 1</p>
+        <div class="persona-photo"><img src="assets/sophiemartin.jpg" alt="Lucie Martin" /></div>
+        <p class="persona-name">Lucie Martin</p>
+        <p class="persona-role"><span class="t-fr">Formatrice en ligne</span><span class="t-en">Online trainer</span></p>
+        <p class="persona-desc"><span class="t-fr">Travaille depuis chez elle. Organise r&eacute;guli&egrave;rement des &eacute;v&eacute;nements familiaux et entre amies.</span><span class="t-en">Works from home. Regularly organizes family and friends gatherings.</span></p>
+        <p class="persona-sublabel"><span class="t-fr">Objectifs</span><span class="t-en">Goals</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">R&eacute;unir proches &amp; coll&egrave;gues</span><span class="t-en">Bring together family &amp; colleagues</span></span>
+          <span class="persona-item"><span class="t-fr">Partager ses connaissances</span><span class="t-en">Share her knowledge</span></span>
+          <span class="persona-item"><span class="t-fr">Apprendre en continu</span><span class="t-en">Keep learning</span></span>
+        </div>
+        <p class="persona-sublabel"><span class="t-fr">Freins</span><span class="t-en">Pain points</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">Difficult&eacute; &agrave; trouver des cr&eacute;naux compatibles</span><span class="t-en">Difficulty finding compatible time slots</span></span>
+          <span class="persona-item"><span class="t-fr">Difficult&eacute; &agrave; maintenir une r&eacute;gularit&eacute; dans les &eacute;v&eacute;nements</span><span class="t-en">Difficulty maintaining regularity in events</span></span>
+          <span class="persona-item"><span class="t-fr">Gestion complexe des outils et des plateformes</span><span class="t-en">Complex management of tools and platforms</span></span>
+        </div>
+      </div>
+
+      <div class="persona-card persona-card--selected">
+        <p class="persona-badge"><span class="t-fr">Persona retenu &#10003;</span><span class="t-en">Primary Persona &#10003;</span></p>
+        <div class="persona-photo"><img src="assets/thomascarrel.jpg" alt="Thomas Carrel" /></div>
+        <p class="persona-name">Thomas Carrel</p>
+        <p class="persona-role">Directeur artistique - Balenciaga</p>
+        <p class="persona-desc"><span class="t-fr">Responsable de la direction cr&eacute;ative de campagnes et d&rsquo;&eacute;v&eacute;nements de marque premium &agrave; Paris.</span><span class="t-en">Responsible for creative direction of premium brand campaigns and events in Paris.</span></p>
+        <p class="persona-sublabel"><span class="t-fr">Objectifs</span><span class="t-en">Goals</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">Trouver des pop-ups de luxe</span><span class="t-en">Find luxury pop-ups</span></span>
+          <span class="persona-item"><span class="t-fr">D&eacute;velopper son r&eacute;seau</span><span class="t-en">Grow his network</span></span>
+          <span class="persona-item"><span class="t-fr">D&eacute;couvrir des spots photo</span><span class="t-en">Discover photo spots</span></span>
+        </div>
+        <p class="persona-sublabel"><span class="t-fr">Freins</span><span class="t-en">Pain points</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">Peu d&rsquo;events dans sa ville</span><span class="t-en">Few events in his city</span></span>
+          <span class="persona-item"><span class="t-fr">Infos &eacute;parpill&eacute;es</span><span class="t-en">Scattered information</span></span>
+          <span class="persona-item"><span class="t-fr">Longs trajets</span><span class="t-en">Long commutes</span></span>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <p class="persona-badge">Persona 3</p>
+        <div class="persona-photo"><img src="assets/alexia.jpg" alt="Alexia Ferdandez" /></div>
+        <p class="persona-name">Alexia Ferdandez</p>
+        <p class="persona-role"><span class="t-fr">&Eacute;tudiante</span><span class="t-en">Student</span></p>
+        <p class="persona-desc"><span class="t-fr">Budget limit&eacute;, tr&egrave;s active sur les r&eacute;seaux. Cherche des sorties culturelles accessibles.</span><span class="t-en">Limited budget, very active on social media. Looking for affordable cultural outings.</span></p>
+        <p class="persona-sublabel"><span class="t-fr">Objectifs</span><span class="t-en">Goals</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">Sorties abordables</span><span class="t-en">Affordable outings</span></span>
+          <span class="persona-item"><span class="t-fr">Events culturels</span><span class="t-en">Cultural events</span></span>
+          <span class="persona-item"><span class="t-fr">Se cr&eacute;er un r&eacute;seau</span><span class="t-en">Build a network</span></span>
+        </div>
+        <p class="persona-sublabel"><span class="t-fr">Freins</span><span class="t-en">Pain points</span></p>
+        <div class="persona-items">
+          <span class="persona-item"><span class="t-fr">Budget serr&eacute;</span><span class="t-en">Tight budget</span></span>
+          <span class="persona-item"><span class="t-fr">Temps limit&eacute;</span><span class="t-en">Limited time</span></span>
+          <span class="persona-item"><span class="t-fr">Infos &eacute;parpill&eacute;es</span><span class="t-en">Scattered information</span></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-number">03</p>
+      <h2 class="section-title"><span class="t-fr">Notre processus</span><span class="t-en">Our Process</span></h2>
+      <p class="section-sub"><span class="t-fr">13 &eacute;tapes - de la recherche utilisateur jusqu&rsquo;au pitch final.</span><span class="t-en">13 steps - from user research to the final pitch.</span></p>
+    </div>
+    <div class="tl-phases">
+      <span class="tl-phase tl-phase--1"><span class="t-fr">Phase 1 - Recherche</span><span class="t-en">Phase 1 - Research</span></span>
+      <span class="tl-phase tl-phase--2">Phase 2 - Design</span>
+      <span class="tl-phase tl-phase--3"><span class="t-fr">Phase 3 - Validation</span><span class="t-en">Phase 3 - Validation</span></span>
+    </div>
+    <div class="tl-overflow">
+      <div class="tl-grid">
+        <div class="tl-horiz-line" aria-hidden="true"></div>
+
+        <!-- Col 1 — above — P1 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p1">
+            <span class="tl-step-num">01</span>
+            <p class="tl-step-title"><span class="t-fr">Entretien utilisateur</span><span class="t-en">User interview</span></p>
+            <p class="tl-step-desc"><span class="t-fr">Interview M. Nicrole Recherche qualitative</span><span class="t-en">Interview M. Nicrole Qualitative research</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p1"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 2 — below — P1 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p1"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p1">
+            <span class="tl-step-num">02</span>
+            <p class="tl-step-title">Persona</p>
+            <p class="tl-step-desc"><span class="t-fr">Thomas Carrel retenu DA - Balenciaga</span><span class="t-en">Thomas Carrel selected AD - Balenciaga</span></p>
+          </div>
+        </div>
+
+        <!-- Col 3 — above — P1 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p1">
+            <span class="tl-step-num">03</span>
+            <p class="tl-step-title"><span class="t-fr">Parcours utilisateur</span><span class="t-en">User journey</span></p>
+            <p class="tl-step-desc"><span class="t-fr">User Journey Map Sc&eacute;nario Thomas</span><span class="t-en">User Journey Map Thomas scenario</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p1"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 4 — below — P1 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p1"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p1">
+            <span class="tl-step-num">04</span>
+            <p class="tl-step-title"><span class="t-fr">Probl&eacute;matisation</span><span class="t-en">Problem framing</span></p>
+            <p class="tl-step-desc"><span class="t-fr">HMW Reformulation du probl&egrave;me</span><span class="t-en">HMW Problem reframing</span></p>
+          </div>
+        </div>
+
+        <!-- Col 5 — above — P2 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p2">
+            <span class="tl-step-num">05</span>
+            <p class="tl-step-title"><span class="t-fr">Id&eacute;ation</span><span class="t-en">Ideation</span></p>
+            <p class="tl-step-desc"><span class="t-fr">Crazy 8 S&eacute;lection solutions</span><span class="t-en">Crazy 8 Solution selection</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p2"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 6 — below — P2 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p2"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p2">
+            <span class="tl-step-num">06</span>
+            <p class="tl-step-title">User Flow</p>
+            <p class="tl-step-desc"><span class="t-fr">Architecture nav 3 flux principaux</span><span class="t-en">Nav architecture 3 main flows</span></p>
+          </div>
+        </div>
+
+        <!-- Col 7 — above — P2 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p2">
+            <span class="tl-step-num">07</span>
+            <p class="tl-step-title">Wireframes</p>
+            <p class="tl-step-desc"><span class="t-fr">20 &eacute;crans Lo-Fi Annot&eacute;s &amp; test&eacute;s</span><span class="t-en">20 Lo-Fi screens Annotated &amp; tested</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p2"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 8 — below — P2 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p2"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p2">
+            <span class="tl-step-num">08</span>
+            <p class="tl-step-title"><span class="t-fr">Test utilisateur 1</span><span class="t-en">Usability Testing 1</span></p>
+            <p class="tl-step-desc"><span class="t-fr">3 fiches observation It&eacute;rations nav</span><span class="t-en">3 observation sheets Nav iterations</span></p>
+          </div>
+        </div>
+
+        <!-- Col 9 — above — P3 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p3">
+            <span class="tl-step-num">09</span>
+            <p class="tl-step-title">Prototype Mid-Fi</p>
+            <p class="tl-step-desc">Design system 90+ interactions</p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p3"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 10 — below — P3 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p3"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p3">
+            <span class="tl-step-num">10</span>
+            <p class="tl-step-title"><span class="t-fr">Test utilisateur 2</span><span class="t-en">Usability Testing 2</span></p>
+            <p class="tl-step-desc"><span class="t-fr">Nouveaux participants Ajustements UX</span><span class="t-en">New participants UX adjustments</span></p>
+          </div>
+        </div>
+
+        <!-- Col 11 — above — P3 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p3">
+            <span class="tl-step-num">11</span>
+            <p class="tl-step-title"><span class="t-fr">Veille UI/UX</span><span class="t-en">UI/UX Watch</span></p>
+            <p class="tl-step-desc"><span class="t-fr">Benchmark Tendances 2025-26</span><span class="t-en">Benchmark Trends 2025-26</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p3"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <!-- Col 12 — below — P3 -->
+        <div class="tl-col tl-col--below">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot tl-dot--p3"></div>
+          <div class="tl-conn"></div>
+          <div class="tl-card tl-card--p3">
+            <span class="tl-step-num">12</span>
+            <p class="tl-step-title">Design system</p>
+            <p class="tl-step-desc"><span class="t-fr">Palette, Typo Composants</span><span class="t-en">Palette, Typo Components</span></p>
+          </div>
+        </div>
+
+        <!-- Col 13 — above — P3 -->
+        <div class="tl-col tl-col--above">
+          <div class="tl-card tl-card--p3">
+            <span class="tl-step-num">13</span>
+            <p class="tl-step-title">Pitch</p>
+            <p class="tl-step-desc"><span class="t-fr">Case study Handoff devs</span><span class="t-en">Case study Dev handoff</span></p>
+          </div>
+          <div class="tl-conn"></div>
+          <div class="tl-dot tl-dot--p3"></div>
+          <div class="tl-spacer"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section section--alt">
+    <div class="section-header">
+      <p class="section-number">04</p>
+      <h2 class="section-title">User Flow</h2>
+      <p class="section-sub"><span class="t-fr">Sch&eacute;ma de navigation - parcours de Thomas de l&rsquo;ouverture de l&rsquo;app au feedback post-event.</span><span class="t-en">Navigation diagram - Thomas's journey from app opening to post-event feedback.</span></p>
+    </div>
+
+    <div class="uf-scroll">
+      <div class="uf-flow">
+
+        <!-- Thomas flottant au-dessus de HOME -->
+        <div class="uf-home-wrap">
+          <div class="uf-thomas-float">
+            <div class="uf-node uf-node--user">
+              <span class="uf-nm">Thomas</span>
+              <span class="uf-sb"><span class="t-fr">utilisateur</span><span class="t-en">user</span></span>
+            </div>
+            <div class="uf-vc-s"></div>
+            <span class="uf-vc-lbl"><span class="t-fr">ouvre l&rsquo;app</span><span class="t-en">opens the app</span></span>
+            <div class="uf-vc-s"></div>
+          </div>
+          <div class="uf-node uf-node--screen">HOME</div>
+        </div>
+
+        <div class="uf-hc"></div>
+
+        <div class="uf-node uf-node--cat"><span class="t-fr">Choisir la cat&eacute;gorie</span><span class="t-en">Choose category</span></div>
+
+        <div class="uf-hc"></div>
+
+        <!-- Fork : Créer en flux principal, Rejoindre flotte en dessous -->
+        <div class="uf-creer-wrap">
+          <div class="uf-fork-a"><span class="t-fr">&ldquo;Cr&eacute;er un event&rdquo;</span><span class="t-en">&ldquo;Create an event&rdquo;</span></div>
+          <div class="uf-rejoindre-below">
+            <div class="uf-fork-b"><span class="t-fr">&ldquo;Rejoindre un event&rdquo;</span><span class="t-en">&ldquo;Join an event&rdquo;</span></div>
+          </div>
+        </div>
+
+        <div class="uf-hc"></div>
+
+        <div class="uf-node uf-node--pro">
+          <span><span class="t-fr">Page Pro</span><span class="t-en">Pro page</span></span>
+          <span class="uf-sb"><span class="t-fr">(cr&eacute;er un event)</span><span class="t-en">(create an event)</span></span>
+        </div>
+
+        <div class="uf-hc" style="position:relative;"><span class="uf-hc-lbl"><span class="t-fr">li&eacute;e</span><span class="t-en">linked</span></span></div>
+
+        <div class="uf-node uf-node--invite">
+          <p class="uf-invite-title"><span class="t-fr">Partie : Invitation</span><span class="t-en">Section: Invitation</span></p>
+          <p class="uf-invite-item"><span class="t-fr">1. Espace collaboratif (chat)</span><span class="t-en">1. Collaborative space (chat)</span></p>
+          <p class="uf-invite-item"><span class="t-fr">2. To-do (temps r&eacute;el)</span><span class="t-en">2. To-do (real time)</span></p>
+          <p class="uf-invite-item"><span class="t-fr">3. Info de l&rsquo;event (r&eacute;cap lieu, heure...)</span><span class="t-en">3. Event info (venue, time recap...)</span></p>
+          <p class="uf-invite-item"><span class="t-fr">4. Budget partag&eacute; (d&eacute;penses...)</span><span class="t-en">4. Shared budget (expenses...)</span></p>
+          <p class="uf-invite-item"><span class="t-fr">5. Itin&eacute;raire recommand&eacute; (Maps)</span><span class="t-en">5. Recommended itinerary (Maps)</span></p>
+        </div>
+
+        <div class="uf-hc"></div>
+
+        <!-- Rappel avec Check-in + Feedback en dessous -->
+        <div class="uf-rappel-wrap">
+          <div class="uf-node uf-node--rappel">
+            <p class="uf-rappel-t"><span class="t-fr">Rappel : event</span><span class="t-en">Reminder: event</span></p>
+            <p class="uf-rappel-i">Event</p>
+            <p class="uf-rappel-i"><span class="t-fr">Itin&eacute;raire</span><span class="t-en">Itinerary</span></p>
+            <p class="uf-rappel-i">Chat / confirmation</p>
+          </div>
+          <div class="uf-below-float">
+            <div class="uf-vc"></div>
+            <div class="uf-node uf-node--checkin">Check-in (QR Code)</div>
+            <div class="uf-vc"></div>
+            <div class="uf-node uf-node--feedback"><span class="t-fr">Feedback (avis)</span><span class="t-en">Feedback (review)</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="uf-legend">
+      <span class="uf-legend-title"><span class="t-fr">L&eacute;gende :</span><span class="t-en">Legend:</span></span>
+      <span class="uf-legend-item"><span class="uf-legend-dot" style="background:#0A0A0A;"></span><span class="t-fr">Utilisateur</span><span class="t-en">User</span></span>
+      <span class="uf-legend-item"><span class="uf-legend-dot" style="background:#F8F6F2;border:1px solid #0A0A0A;"></span><span class="t-fr">&Eacute;cran app</span><span class="t-en">App screen</span></span>
+      <span class="uf-legend-item"><span class="uf-legend-dot" style="background:#0A0A0A;"></span><span class="t-fr">&Eacute;cran cl&eacute;</span><span class="t-en">Key screen</span></span>
+      <span class="uf-legend-item"><span class="uf-legend-dot" style="background:rgba(10,10,10,0.07);border:1px solid rgba(10,10,10,0.2);"></span><span class="t-fr">&Eacute;cran final</span><span class="t-en">Final screen</span></span>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section section--fullimg">
+    <img src="assets/wireframe_lowfi.png" alt="Wireframes Low Fidelity" class="wf-fullimg t-fr" />
+    <img src="assets/wireframelowfi.png" alt="Wireframes Low Fidelity" class="wf-fullimg t-en" />
+  </section>
+
+  <!-- 06 -->
+  <section class="section section--alt">
+    <div class="section-header">
+      <p class="section-number">06</p>
+      <h2 class="section-title"><span class="t-fr">Test utilisateur 1 - sur wireframes</span><span class="t-en">User test 1 - on wireframes</span></h2>
+      <p class="section-sub"><span class="t-fr">3 fiches d&rsquo;observation. Retours directs des utilisateurs sur les 20 &eacute;crans Low-Fi.</span><span class="t-en">3 observation sheets. Direct user feedback on the 20 Low-Fi screens.</span></p>
+    </div>
+    <div class="test-grid">
+      <div>
+        <h3 class="test-col-title"><span class="t-fr">Probl&egrave;mes observ&eacute;s</span><span class="t-en">Issues identified</span></h3>
+        <ul class="problems-list">
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 3</span><span class="t-en">Screen 3</span></span><span class="problem-text"><span class="t-fr">Le bouton &laquo;&nbsp;Autres&nbsp;&raquo; est inutile - pr&eacute;f&eacute;rer une saisie libre</span><span class="t-en">The &ldquo;Other&rdquo; button is useless - prefer a free text input</span></span></li>
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 4</span><span class="t-en">Screen 4</span></span><span class="problem-text"><span class="t-fr">Impossible de s&eacute;lectionner une date : confusion</span><span class="t-en">Unable to select a date: confusion</span></span></li>
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 5</span><span class="t-en">Screen 5</span></span><span class="problem-text"><span class="t-fr">La saisie de nom renvoyait directement &agrave; la page suivante</span><span class="t-en">The name input jumped directly to the next page</span></span></li>
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 6</span><span class="t-en">Screen 6</span></span><span class="problem-text"><span class="t-fr">Clic sur le lieu sans r&eacute;sultat - bouton peu visible</span><span class="t-en">Click on location with no result - button barely visible</span></span></li>
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 11</span><span class="t-en">Screen 11</span></span><span class="problem-text"><span class="t-fr">Clic sur D&eacute;part sans r&eacute;ponse : abandon</span><span class="t-en">Click on Depart with no response: drop-off</span></span></li>
+          <li class="problem-item"><span class="problem-screen"><span class="t-fr">&Eacute;cran 12</span><span class="t-en">Screen 12</span></span><span class="problem-text"><span class="t-fr">Bouton Suivant trop bas - scroll important requis</span><span class="t-en">Next button too low - significant scroll required</span></span></li>
+        </ul>
+        <p class="decisions-title"><span class="t-fr">D&eacute;cisions apr&egrave;s les tests</span><span class="t-en">Design decisions</span></p>
+        <ul class="decisions-list">
+          <li><span class="t-fr">Refonte de la navigation</span><span class="t-en">Navigation redesign</span></li>
+          <li><span class="t-fr">Ajout d&rsquo;un &eacute;cran d&rsquo;accueil et Home</span><span class="t-en">Added a welcome screen and Home</span></li>
+          <li><span class="t-fr">Calendrier interactif requis</span><span class="t-en">Interactive calendar required</span></li>
+          <li><span class="t-fr">R&eacute;organisation des &eacute;crans chat &amp; to-do</span><span class="t-en">Reorganization of chat &amp; to-do screens</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="test-col-title"><span class="t-fr">Ce qu&rsquo;ils ont dit</span><span class="t-en">What they said</span></h3>
+        <div class="quote-block">
+          <p class="quote-text"><span class="t-fr">&laquo;&nbsp;M&ecirc;me sans design final, le wireframe permet de comprendre rapidement les fonctionnalit&eacute;s principales. Les informations sont bien hi&eacute;rarchis&eacute;es&nbsp;&raquo;</span><span class="t-en">&ldquo;Even without a final design, the wireframe quickly conveys the main features. Information is well structured.&rdquo;</span></p>
+          <p class="quote-author">Lea. M</p>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text"><span class="t-fr">&laquo;&nbsp;O&ugrave; est-ce que je peux r&eacute;cup&eacute;rer mes contacts ? Je ne vais pas les taper un par un !&nbsp;&raquo;</span><span class="t-en">&ldquo;Where can I import my contacts? I'm not going to type them one by one!&rdquo;</span></p>
+          <p class="quote-author">&Eacute;tienne. B</p>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text"><span class="t-fr">&laquo;&nbsp;Les intitul&eacute;s de certains menus ne sont pas suffisamment explicites. Des libell&eacute;s plus pr&eacute;cis aideraient &agrave; mieux comprendre leur fonction.&nbsp;&raquo;</span><span class="t-en">&ldquo;Some menu labels aren't explicit enough. More precise labels would help understand their purpose.&rdquo;</span></p>
+          <p class="quote-author">Antoine. C</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="section section--fullimg">
+    <img src="assets/wireframe_midfi.png" alt="Prototype Mid-Fidelity" class="wf-fullimg t-fr" />
+    <img src="assets/wireframemidfi.png" alt="Prototype Mid-Fidelity" class="wf-fullimg t-en" />
+  </section>
+
+  <!-- 08 -->
+  <section class="section section--alt">
+    <div class="section-header">
+      <p class="section-number">08</p>
+      <h2 class="section-title"><span class="t-fr">Test utilisateur 2 - sur prototype</span><span class="t-en">User test 2 - on prototype</span></h2>
+      <p class="section-sub"><span class="t-fr">Nouveaux participants, diff&eacute;rents de ceux du premier tour, avec des notes d&eacute;taill&eacute;es prises pendant les s&eacute;ances</span><span class="t-en">New participants, different from the first round, with detailed notes taken during sessions.</span></p>
+    </div>
+    <div class="test-grid">
+      <div>
+        <h3 class="test-col-title"><span class="t-fr">Observations cl&eacute;s</span><span class="t-en">Key observations</span></h3>
+        <ul class="problems-list">
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;">Timer</span><span class="problem-text"><span class="t-fr">Ajouter un timer au 1er &eacute;cran pour passer automatiquement</span><span class="t-en">Add a timer to the 1st screen to advance automatically</span></span></li>
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;"><span class="t-fr">Calendr.</span><span class="t-en">Calendar</span></span><span class="problem-text"><span class="t-fr">Un vrai calendrier interactif est attendu pour la date</span><span class="t-en">A real interactive calendar is expected for date selection</span></span></li>
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;"><span class="t-fr">Saisie</span><span class="t-en">Input</span></span><span class="problem-text"><span class="t-fr">Ajouter un clavier visible pour la saisie du nom</span><span class="t-en">Add a visible keyboard for name input</span></span></li>
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;">Contacts</span><span class="problem-text"><span class="t-fr">Proposer contacts pro vs perso - &eacute;tiquettes distincts</span><span class="t-en">Offer pro vs personal contacts - distinct labels</span></span></li>
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;"><span class="t-fr">Bouton</span><span class="t-en">Button</span></span><span class="problem-text"><span class="t-fr">Changer &laquo;&nbsp;Continuer&nbsp;&raquo; en &laquo;&nbsp;Valider l&rsquo;invitation&nbsp;&raquo;</span><span class="t-en">Change &ldquo;Continue&rdquo; to &ldquo;Confirm invitation&rdquo;</span></span></li>
+          <li class="problem-item"><span class="problem-screen" style="min-width:52px;"><span class="t-fr">Ordre</span><span class="t-en">Order</span></span><span class="problem-text"><span class="t-fr">Mettre Info en premier, puis Chat, puis To-do</span><span class="t-en">Put Info first, then Chat, then To-do</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="test-col-title"><span class="t-fr">Conclusion</span><span class="t-en">Conclusion</span></h3>
+        <div class="quote-block">
+          <p class="quote-text"><span class="t-fr">&laquo;&nbsp;Facile &agrave; utiliser. Ajouter l&rsquo;encoche sur Autres pour &eacute;crire, demander d&egrave;s le d&eacute;but si l&rsquo;event est organis&eacute; &agrave; plusieurs ou seul, ajouter la superficie dans les filtres.&nbsp;&raquo;</span><span class="t-en">&ldquo;Easy to use. Add the notch on Other to type, ask upfront whether the event is organized solo or with others, add area size to filters.&rdquo;</span></p>
+          <p class="quote-author">Julien J.</p>
+        </div>
+        <p class="decisions-title"><span class="t-fr">Points positifs</span><span class="t-en">Positive points</span></p>
+        <ul class="decisions-list">
+          <li><span class="t-fr">App intuitive &amp; fluide</span><span class="t-en">Intuitive &amp; smooth app</span></li>
+          <li><span class="t-fr">&Eacute;cran Suggestion tr&egrave;s appr&eacute;ci&eacute;</span><span class="t-en">Suggestion screen highly appreciated</span></li>
+          <li><span class="t-fr">Paiement partag&eacute; bien compris</span><span class="t-en">Shared payment well understood</span></li>
+        </ul>
+        <p class="decisions-title"><span class="t-fr">Points &agrave; am&eacute;liorer</span><span class="t-en">Areas for improvement</span></p>
+        <ul class="decisions-list">
+          <li><span class="t-fr">Calendrier interactif manquant</span><span class="t-en">Interactive calendar missing</span></li>
+          <li><span class="t-fr">Saisie de texte peu claire</span><span class="t-en">Text input unclear</span></li>
+          <li><span class="t-fr">Navigation itin&eacute;raire confuse</span><span class="t-en">Itinerary navigation confusing</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-number">09</p>
+      <h2 class="section-title"><span class="t-fr">Identit&eacute; visuelle &amp; Design system</span><span class="t-en">Visual identity &amp; Design system</span></h2>
+    </div>
+    <div class="ds-grid">
+      <div>
+        <h3 class="ds-col-title"><span class="t-fr">Palette Sunset</span><span class="t-en">Sunset palette</span></h3>
+        <div class="palette">
+          <div class="swatch"><div class="swatch-color" style="background:#1C1C1E;"></div><div><p class="swatch-name">Anthracite</p><p class="swatch-hex">#1C1C1E</p><p class="swatch-usage"><span class="t-fr">Fond &middot; Headers</span><span class="t-en">Background &middot; Headers</span></p></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#FF6B35;"></div><div><p class="swatch-name">Sunset</p><p class="swatch-hex">#FF6B35</p><p class="swatch-usage">CTA &middot; Accent</p></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#F5F0E8;border:1px solid #E5E0D8;"></div><div><p class="swatch-name">Cr&egrave;me</p><p class="swatch-hex">#F5F0E8</p><p class="swatch-usage"><span class="t-fr">Fond &eacute;crans</span><span class="t-en">Screen background</span></p></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#2C2C2E;"></div><div><p class="swatch-name">Charbon</p><p class="swatch-hex">#2C2C2E</p><p class="swatch-usage">Surfaces</p></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#8E8E93;"></div><div><p class="swatch-name">Gris</p><p class="swatch-hex">#8E8E93</p><p class="swatch-usage"><span class="t-fr">Secondaire</span><span class="t-en">Secondary</span></p></div></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="ds-col-title"><span class="t-fr">Typographie</span><span class="t-en">Typography</span></h3>
+        <p class="typo-label">Inter - Variable Font - Google Fonts</p>
+        <div class="typo-list">
+          <div class="typo-item"><p style="font-size:28px;font-weight:700;color:#1C1C1E;">H1</p><p class="typo-spec">Inter Bold &middot; 28px</p></div>
+          <div class="typo-item"><p style="font-size:22px;font-weight:600;color:#1C1C1E;">H2</p><p class="typo-spec">Inter Semi Bold &middot; 22px</p></div>
+          <div class="typo-item"><p style="font-size:14px;font-weight:400;color:#1C1C1E;">Body</p><p class="typo-spec">Inter Regular &middot; 14px</p></div>
+          <div class="typo-item"><p style="font-size:11px;font-weight:400;color:#1C1C1E;">Caption</p><p class="typo-spec">Inter Regular &middot; 11px</p></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="ds-col-title"><span class="t-fr">Principes UX</span><span class="t-en">UX Principles</span></h3>
+        <div class="principles">
+          <div class="principle"><p class="principle-name"><span class="t-fr">Clart&eacute;</span><span class="t-en">Clarity</span></p><p class="principle-desc"><span class="t-fr">1 &eacute;cran = 1 action</span><span class="t-en">1 screen = 1 action</span></p></div>
+          <div class="principle"><p class="principle-name">Feedback</p><p class="principle-desc"><span class="t-fr">Retour visuel imm&eacute;diat</span><span class="t-en">Immediate visual feedback</span></p></div>
+          <div class="principle"><p class="principle-name">Collaboration</p><p class="principle-desc"><span class="t-fr">Chat, sondages, to-do natifs</span><span class="t-en">Native chat, polls, to-do</span></p></div>
+          <div class="principle"><p class="principle-name"><span class="t-fr">Coh&eacute;rence</span><span class="t-en">Consistency</span></p><p class="principle-desc"><span class="t-fr">Design system unifi&eacute;</span><span class="t-en">Unified design system</span></p></div>
+          <div class="principle"><p class="principle-name">Premium</p><p class="principle-desc"><span class="t-fr">Accessible &agrave; tous les profils</span><span class="t-en">Accessible to all profiles</span></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section section--alt">
+    <div class="section-header">
+      <p class="section-number">10</p>
+      <h2 class="section-title"><span class="t-fr">R&eacute;sultats &amp; Impact</span><span class="t-en">Results &amp; Impact</span></h2>
+      <p class="section-sub"><span class="t-fr">Ce que ce projet a produit, en chiffres et en d&eacute;cisions.</span><span class="t-en">What this project produced, in numbers and decisions.</span></p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <p class="metric-num">20</p>
+        <p class="metric-label">Wireframes Low-Fi</p>
+        <p class="metric-desc"><span class="t-fr">Test&eacute;s et valid&eacute;s par 3 utilisateurs r&eacute;els lors du premier round de tests</span><span class="t-en">Tested and validated by 3 real users during the first round of testing</span></p>
+      </div>
+      <div class="metric-card">
+        <p class="metric-num">6</p>
+        <p class="metric-label"><span class="t-fr">Corrections UX</span><span class="t-en">UX Corrections</span></p>
+        <p class="metric-desc"><span class="t-fr">Int&eacute;gr&eacute;es directement apr&egrave;s les observations terrain des testeurs sur prototype</span><span class="t-en">Integrated directly after testers' field observations on the prototype</span></p>
+      </div>
+      <div class="metric-card metric-card--accent">
+        <p class="metric-num">90+</p>
+        <p class="metric-label">Interactions</p>
+        <p class="metric-desc"><span class="t-fr">Document&eacute;es dans le prototype interactif final, pr&ecirc;t pour la pr&eacute;sentation pitch</span><span class="t-en">Documented in the final interactive prototype, ready for the pitch presentation</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>Wevent &middot; Case Study UX/UI &middot; 2026</span>
+    <span>Hulya Z. &middot; Abira K. &middot; Maxime L.</span>
+    <span><span class="t-fr">Projet acad&eacute;mique</span><span class="t-en">Academic project</span></span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
