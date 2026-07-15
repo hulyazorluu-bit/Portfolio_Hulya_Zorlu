@@ -863,6 +863,7 @@ html.lang-fr .t-en { display: none !important; }
   line-height: 1.7;
   color: rgba(248,246,242,0.82);
   transform: translateX(calc(-1 * var(--gg)));
+  margin-top: 18px;
 }
 .about_desc p + p { margin-top: 1.3em; }
 
