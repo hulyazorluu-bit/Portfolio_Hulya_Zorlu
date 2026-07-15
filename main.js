@@ -94,7 +94,7 @@ function rndFake() {
   const line1El = document.getElementById('loader-line1');
   const line2El = document.getElementById('loader-line2');
   const TEXT1   = 'Hulya Zorlu';
-  const TEXT2   = 'UI_UX_Designer_Portfolio';
+  const TEXT2   = 'Product__Designer_Portfolio';
 
   function typeWriter(el, text, charDelay, startDelay) {
     if (!el) return;
