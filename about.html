@@ -6,7 +6,7 @@
     (function(){var l=localStorage.getItem('lang')||'fr';document.documentElement.className='lang-'+l;})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Hulya Zorlu, Product Manager · UI/UX Design Enthusiast</title>
+  <title>About - Hulya Zorlu, Product Manager and UI/UX Design Enthusiast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet" />
@@ -28,7 +28,6 @@
       min-height: 100vh;
     }
 
-    /* ── CADRE EXTÉRIEUR ── */
     .frame {
       margin: 12px;
       min-height: calc(100vh - 24px);
@@ -38,7 +37,6 @@
       grid-template-rows: auto 1fr auto;
     }
 
-    /* ── BARRE DU HAUT ── */
     .top-bar {
       grid-column: 1 / 3;
       grid-row: 1;
@@ -69,7 +67,6 @@
     .top-link:hover { opacity: 0.45; }
     .top-link.active { color: #1C1C1E; }
 
-    /* ── COLONNE GAUCHE ── */
     .col-left {
       grid-column: 1;
       grid-row: 2;
@@ -93,7 +90,6 @@
       flex-shrink: 0;
     }
 
-    /* ── COLONNE DROITE ── */
     .col-right {
       grid-column: 2;
       grid-row: 2;
@@ -121,7 +117,6 @@
     }
     .right-contact a:hover { text-decoration: underline; }
 
-    /* ── SECTIONS ── */
     .section {
       padding-top: 2.4rem;
       margin-top: 2.4rem;
@@ -135,7 +130,6 @@
       margin-bottom: 1.4rem;
     }
 
-    /* BIO */
     .bio p {
       font-size: 1.2rem;
       line-height: 1.7;
@@ -144,7 +138,6 @@
     }
     .bio p + p { margin-top: 1.2em; }
 
-    /* FORMATION */
     .edu-item + .edu-item { margin-top: 1.4rem; }
     .edu-degree {
       font-size: 1.2rem;
@@ -156,7 +149,6 @@
       margin-top: 0.2rem;
     }
 
-    /* COMPÉTENCES */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -180,7 +172,6 @@
       margin-left: 0.5em;
     }
 
-    /* ── BARRE DU BAS ── */
     .bottom-bar {
       grid-column: 1 / 3;
       grid-row: 3;
@@ -210,7 +201,6 @@
     }
     .bottom-link:hover { opacity: 0.45; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .frame {
         grid-template-columns: 1fr;
@@ -239,7 +229,6 @@
 
     :focus-visible { outline: 2px solid #1C1C1E; outline-offset: 3px; }
 
-    /* ── LANGUAGE TOGGLE ── */
     html.lang-en .t-fr { display: none !important; }
     html.lang-fr .t-en { display: none !important; }
     .lang-toggle {
@@ -272,108 +261,105 @@
 
   <div class="frame" role="main">
 
-    <!-- BARRE DU HAUT -->
     <div class="top-bar">
-      <a href="index.html" class="top-link"><span class="t-fr">← Portfolio</span><span class="t-en">← Portfolio</span></a>
+      <a href="index.html" class="top-link"><span class="t-fr">Portfolio</span><span class="t-en">Portfolio</span></a>
       <nav class="top-nav" aria-label="Navigation principale" style="display:flex;align-items:center;gap:2rem;">
         <div class="lang-toggle">
           <button class="lang-btn" data-lang="fr">FR</button>
           <span class="lang-sep">/</span>
           <button class="lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="about.html" class="top-link active"><span class="t-fr">À Propos</span><span class="t-en">About</span></a>
+        <a href="about.html" class="top-link active"><span class="t-fr">A Propos</span><span class="t-en">About</span></a>
       </nav>
     </div>
 
-    <!-- GAUCHE : photo -->
     <div class="col-left">
       <div class="photo">
         <img src="assets/hulyaa.jpg" alt="Hulya Zorlu, Product Manager, UI/UX Design Enthusiast" />
       </div>
     </div>
 
-    <!-- DROITE : tout le contenu -->
     <div class="col-right">
 
       <div class="right-header">
         <p class="right-name">Hulya Zorlu</p>
-        <p class="right-role"><span class="t-fr">Chef de Produit &middot; Passionn&eacute;e par le Design UI/UX</span><span class="t-en">Product Manager &middot; Passionate about UI/UX Design</span></p>
+        <p class="right-role"><span class="t-fr">Chef de Produit - Passionnee par le Design UI/UX</span><span class="t-en">Product Manager - Passionate about UI/UX Design</span></p>
         <p class="right-contact"><a href="mailto:zorluu.hulya@gmail.com">zorluu.hulya@gmail.com</a></p>
       </div>
 
       <div class="section bio">
         <p class="section-title"><span class="t-fr">Profil</span><span class="t-en">Profile</span></p>
         <p>
-          <span class="t-fr">Trilingue fran&ccedil;ais, anglais, turc, j&rsquo;ai grandi entre plusieurs cultures. C&rsquo;est probablement l&agrave; que tout commence&nbsp;: cette habitude de regarder un m&ecirc;me probl&egrave;me sous diff&eacute;rents angles avant de trancher, cette curiosit&eacute; qui me pousse &agrave; comprendre le pourquoi avant le comment. Ce r&eacute;flexe, je le retrouve aujourd&rsquo;hui dans chaque projet produit que je porte.</span>
-          <span class="t-en">Trilingual in French, English and Turkish, I grew up across multiple cultures. That is probably where it all started: the habit of looking at the same problem from several angles before deciding, the curiosity that pushes me to understand the why before the how. That reflex is one I bring to every product project I work on today.</span>
+          <span class="t-fr">Trilingue francais, anglais, turc, j'ai grandi entre plusieurs cultures. C'est probablement la que tout commence, cette habitude de regarder un meme probleme sous differents angles avant de trancher, cette curiosite qui me pousse a comprendre le pourquoi avant le comment. Ce reflexe, je le retrouve aujourd'hui dans chaque projet produit que je porte.</span>
+          <span class="t-en">Trilingual in French, English and Turkish, I grew up across multiple cultures. That is probably where it all started, the habit of looking at the same problem from several angles before deciding, the curiosity that pushes me to understand the why before the how. That reflex is one I bring to every product project I work on today.</span>
         </p>
         <p>
-          <span class="t-fr">Apr&egrave;s une Licence en Langues Appliqu&eacute;es et Commerce International, un Erasmus au Portugal et un Master en Marketing et Data &agrave; l&rsquo;INSEEC, j&rsquo;ai construit un socle solide en business, en strat&eacute;gie et en analyse. Mais quelque chose me manquait&nbsp;: la ma&icirc;trise concr&egrave;te du produit et du design, ce moment o&ugrave; une id&eacute;e business devient une interface qu&rsquo;un utilisateur va vraiment toucher.</span>
-          <span class="t-en">After a BA in Applied Languages and International Trade, an Erasmus year in Portugal and a Master&rsquo;s in Marketing and Data at INSEEC, I built a solid foundation in business, strategy and analysis. But something was missing: the hands-on mastery of product and design, that moment when a business idea becomes an interface a real user will actually touch.</span>
+          <span class="t-fr">Apres une Licence en Langues Appliquees et Commerce International, un Erasmus au Portugal et un Master en Marketing et Data a l'INSEEC, j'ai construit un socle solide en business, en strategie et en analyse. Mais quelque chose me manquait, la maitrise concrete du produit et du design, ce moment ou une idee business devient une interface qu'un utilisateur va vraiment toucher.</span>
+          <span class="t-en">After a BA in Applied Languages and International Trade, an Erasmus year in Portugal and a Master's in Marketing and Data at INSEEC, I built a solid foundation in business, strategy and analysis. But something was missing, the hands-on mastery of product and design, that moment when a business idea becomes an interface a real user will actually touch.</span>
         </p>
         <p>
-          <span class="t-fr">Pour aller chercher ce qui me manquait, j&rsquo;ai choisi le Certificat Design UX/UI et D&eacute;veloppement Web &agrave; l&rsquo;emlyon Business School - La Toile. Une formation intensive o&ugrave; j&rsquo;ai pilot&eacute; des projets de bout en bout, de la recherche utilisateur au prototypage, tout en apprenant &agrave; coder mes designs en HTML, CSS et JavaScript. C&rsquo;est l&agrave; que j&rsquo;ai vraiment trouv&eacute; ma place, quelque part entre le business, le produit et le design.</span>
+          <span class="t-fr">Pour aller chercher ce qui me manquait, j'ai choisi le Certificat Design UX/UI et Developpement Web a l'emlyon Business School - La Toile. Une formation intensive ou j'ai pilote des projets de bout en bout, de la recherche utilisateur au prototypage, tout en apprenant a coder mes designs en HTML, CSS et JavaScript. C'est la que j'ai vraiment trouve ma place, quelque part entre le business, le produit et le design.</span>
           <span class="t-en">To go get what was missing, I chose the UX/UI Design and Web Development Certificate at emlyon Business School - La Toile. An intensive program where I led projects end to end, from user research to prototyping, while learning to code my designs in HTML, CSS and JavaScript. That is where I really found my place, somewhere between business, product and design.</span>
         </p>
         <p>
-          <span class="t-fr">Aujourd&rsquo;hui, je me vois comme un chef de produit polyvalent, &agrave; l&rsquo;aise avec la data, la strat&eacute;gie et le design. J&rsquo;aime porter un produit du premier atelier de cadrage jusqu&rsquo;au lancement, faire le pont entre les &eacute;quipes m&eacute;tier et techniques, et garder toujours en t&ecirc;te l&rsquo;utilisateur final et l&rsquo;objectif business. Le design produit et l&rsquo;UI/UX restent une vraie passion, mais je les vois comme un moyen d&rsquo;arriver &agrave; un bon produit, pas comme une fin en soi.</span>
+          <span class="t-fr">Aujourd'hui, je me vois comme un chef de produit polyvalent, a l'aise avec la data, la strategie et le design. J'aime porter un produit du premier atelier de cadrage jusqu'au lancement, faire le pont entre les equipes metier et techniques, et garder toujours en tete l'utilisateur final et l'objectif business. Le design produit et l'UI/UX restent une vraie passion, mais je les vois comme un moyen d'arriver a un bon produit, pas comme une fin en soi.</span>
           <span class="t-en">Today I see myself as a versatile product manager, comfortable with data, strategy and design. I love owning a product from the first framing workshop to launch, bridging business and technical teams, and keeping the end user and the business goal in focus at every step. Product design and UI/UX remain a real passion, but I see them as a way to get to a good product, not as a goal in itself.</span>
         </p>
         <p>
-          <span class="t-fr">Curieuse de nature, j&rsquo;observe les d&eacute;tails que d&rsquo;autres survolent&nbsp;: une affiche bien compos&eacute;e, une appli bien pens&eacute;e, un choix typographique. Ce m&ecirc;me &oelig;il pour le d&eacute;tail, je l&rsquo;applique &agrave; chaque projet, avec la conviction que ce sont ces petites choses qui font la diff&eacute;rence entre un produit correct et un produit qu&rsquo;on aime utiliser.</span>
-          <span class="t-en">Curious by nature, I notice the details others skim past: a well-composed poster, a thoughtful app, a typographic choice. That same eye for detail is one I bring to every project, with the belief that these small things make the difference between a product that works and a product people love using.</span>
+          <span class="t-fr">Curieuse de nature, j'observe les details que d'autres survolent, une affiche bien composee, une appli bien pensee, un choix typographique. Ce meme oeil pour le detail, je l'applique a chaque projet, avec la conviction que ce sont ces petites choses qui font la difference entre un produit correct et un produit qu'on aime utiliser.</span>
+          <span class="t-en">Curious by nature, I notice the details others skim past, a well-composed poster, a thoughtful app, a typographic choice. That same eye for detail is one I bring to every project, with the belief that these small things make the difference between a product that works and a product people love using.</span>
         </p>
       </div>
 
       <div class="section">
         <p class="section-title"><span class="t-fr">Formation</span><span class="t-en">Education</span></p>
         <div class="edu-item">
-          <p class="edu-degree">Certificat Design UX/UI &amp; D&eacute;veloppement Web</p>
-          <p class="edu-year">emlyon - La Toile &middot; 2026</p>
+          <p class="edu-degree">Certificat Design UX/UI et Developpement Web</p>
+          <p class="edu-year">emlyon - La Toile - 2026</p>
         </div>
         <div class="edu-item">
-          <p class="edu-degree">Master Data Analytics &amp;&nbsp;Marketing Management</p>
-          <p class="edu-year">INSEEC &middot; 2024</p>
+          <p class="edu-degree">Master Data Analytics and Marketing Management</p>
+          <p class="edu-year">INSEEC - 2024</p>
         </div>
       </div>
 
       <div class="section">
-        <p class="section-title"><span class="t-fr">Comp&eacute;tences</span><span class="t-en">Skills</span></p>
+        <p class="section-title"><span class="t-fr">Competences</span><span class="t-en">Skills</span></p>
         <div class="skills-grid">
           <div>
             <p class="skill-group-title">UX Design</p>
             <ul class="skill-list">
               <li><span class="t-fr">Recherche Utilisateur</span><span class="t-en">User Research</span></li>
-              <li><span class="t-fr">Tests d&rsquo;Utilisabilit&eacute;</span><span class="t-en">Usability Testing</span></li>
+              <li><span class="t-fr">Tests d'Utilisabilite</span><span class="t-en">Usability Testing</span></li>
               <li>Wireframing</li>
-              <li><span class="t-fr">Strat&eacute;gie UX</span><span class="t-en">UX Strategy</span></li>
+              <li><span class="t-fr">Strategie UX</span><span class="t-en">UX Strategy</span></li>
               <li><span class="t-fr">Parcours Utilisateur</span><span class="t-en">User Journey Mapping</span></li>
             </ul>
           </div>
           <div>
-            <p class="skill-group-title"><span class="t-fr">UI &amp; Outils</span><span class="t-en">UI &amp; Tools</span></p>
+            <p class="skill-group-title"><span class="t-fr">UI et Outils</span><span class="t-en">UI and Tools</span></p>
             <ul class="skill-list">
               <li>Figma</li>
               <li>Affinity Designer</li>
-              <li>Illustrator &middot; Photoshop</li>
+              <li>Illustrator - Photoshop</li>
               <li>HTML / CSS / JS</li>
               <li>Design System</li>
             </ul>
           </div>
           <div>
-            <p class="skill-group-title"><span class="t-fr">Produit, Projet &amp; Business</span><span class="t-en">Product, Project &amp; Business</span></p>
+            <p class="skill-group-title"><span class="t-fr">Produit, Projet et Business</span><span class="t-en">Product, Project and Business</span></p>
             <ul class="skill-list">
               <li><span class="t-fr">Gestion de Projet, Agile / Scrum</span><span class="t-en">Project Management, Agile / Scrum</span></li>
-              <li><span class="t-fr">Strat&eacute;gie Produit &amp; Roadmap</span><span class="t-en">Product Strategy &amp; Roadmap</span></li>
-              <li><span class="t-fr">Analyse de Donn&eacute;es</span><span class="t-en">Data Analysis</span></li>
-              <li>KPIs &middot; A/B Testing</li>
-              <li><span class="t-fr">&Eacute;tude de March&eacute;</span><span class="t-en">Market Research</span></li>
+              <li><span class="t-fr">Strategie Produit et Roadmap</span><span class="t-en">Product Strategy and Roadmap</span></li>
+              <li><span class="t-fr">Analyse de Donnees</span><span class="t-en">Data Analysis</span></li>
+              <li>KPIs - A/B Testing</li>
+              <li><span class="t-fr">Etude de Marche</span><span class="t-en">Market Research</span></li>
             </ul>
           </div>
           <div>
             <p class="skill-group-title"><span class="t-fr">Langues</span><span class="t-en">Languages</span></p>
             <ul class="skill-list">
-              <li><span class="t-fr">Français</span><span class="t-en">French</span> <span class="skill-lvl"><span class="t-fr">Natif</span><span class="t-en">Native</span></span></li>
+              <li><span class="t-fr">Francais</span><span class="t-en">French</span> <span class="skill-lvl"><span class="t-fr">Natif</span><span class="t-en">Native</span></span></li>
               <li><span class="t-fr">Anglais</span><span class="t-en">English</span> <span class="skill-lvl">C1</span></li>
               <li><span class="t-fr">Turc</span><span class="t-en">Turkish</span> <span class="skill-lvl"><span class="t-fr">Natif</span><span class="t-en">Native</span></span></li>
             </ul>
@@ -383,7 +369,6 @@
 
     </div>
 
-    <!-- BARRE DU BAS -->
     <div class="bottom-bar"></div>
 
   </div>
