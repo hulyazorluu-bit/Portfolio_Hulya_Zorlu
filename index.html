@@ -125,7 +125,7 @@
       <div class="cnt_bt">
         <h3 class="tt3">
           <span class="t-fr">Chef de produit<br>Passionnée par le Design UI/UX<br>Basée à Paris</span>
-          <span class="t-en">Product Manager<br>UI/UX Design Enthusiast<br>Based in Paris</span>
+          <span class="t-en">Product Manager<br>Passionate about UI/UX Design<br>Based in Paris</span>
         </h3>
         <h4 class="Awrite" id="portfolio-txt">
           <span class="typewriter-container"><span class="typewriter tw-type">PORTFOLIO_26</span></span>
@@ -228,15 +228,15 @@
     <span class="t-en">Product Manager</span>
   </span>
   <span class="about_t2">
-    <span class="t-fr">&amp; Passionnée par le<br>Design UI/UX</span>
-    <span class="t-en">&amp; UI/UX<br>Design Enthusiast</span>
+    <span class="t-fr">Passionnée par<br>le Design UI/UX</span>
+    <span class="t-en">Passionate about<br>UI/UX Design</span>
   </span>
 </h2>
 
       <div class="about_desc">
         <p>
-          <span class="t-fr">Passionnée par le produit, j'aime porter un projet du cadrage jusqu'au lancement. Mon profil polyvalent, à la croisée du business, de la gestion de projet, de la data et du design, me permet de faire le pont entre les équipes métier et techniques. Ce qui me motive, c'est de transformer un besoin en une solution claire, utile et bien conçue, du premier atelier au dernier détail d'interface. Le design produit et l'UI/UX ne sont jamais une finalité en soi&nbsp;: ils servent un objectif business, une expérience utilisateur, un impact mesurable. C'est cet équilibre entre stratégie, exécution et sensibilité design que j'apporte à chaque&nbsp;projet.</span>
-          <span class="t-en">Passionate about product, I love owning a project from framing to launch. My versatile profile, at the crossroads of business, project management, data and design, lets me bridge business and technical teams. What drives me is turning a need into a clear, useful and well-crafted solution, from the first workshop to the last interface detail. Product design and UI/UX are never an end in themselves: they serve a business goal, a user experience, a measurable impact. That balance between strategy, execution and design sensitivity is what I bring to every&nbsp;project.</span>
+          <span class="t-fr">J'aime porter un projet du cadrage jusqu'au lancement. Mon profil polyvalent, à la croisée du business, de la gestion de projet, de la data et du design, me permet de faire le pont entre les équipes métier et techniques. Ce qui me motive, c'est de transformer un besoin en une solution claire, utile et bien conçue, du premier atelier au dernier détail d'interface. Le design produit et l'UI/UX ne sont jamais une finalité en soi&nbsp;: ils servent un objectif business, une expérience utilisateur, un impact mesurable. C'est cet équilibre entre stratégie, exécution et sensibilité design que j'apporte à chaque&nbsp;projet.</span>
+          <span class="t-en">I love owning a project from framing to launch. My versatile profile, at the crossroads of business, project management, data and design, lets me bridge business and technical teams. What drives me is turning a need into a clear, useful and well-crafted solution, from the first workshop to the last interface detail. Product design and UI/UX are never an end in themselves: they serve a business goal, a user experience, a measurable impact. That balance between strategy, execution and design sensitivity is what I bring to every&nbsp;project.</span>
         </p>
       </div>
 
@@ -444,68 +444,3 @@
 
     <div class="contact_body">
       <p class="contact_pre"><span class="t-fr">Disponible pour de nouvelles opportunités</span><span class="t-en">Open to new opportunities</span></p>
-
-      <a href="mailto:zorluu.hulya@gmail.com" class="contact_email">
-        ZORLUU.HULYA<br>@GMAIL.COM
-        <span class="contact_email_arr">↗</span>
-      </a>
-    </div>
-
-    <div class="contact_foot">
-      <div class="contact_socials">
-        <a href="https://www.linkedin.com/in/hulya-zorlu/" target="_blank" rel="noopener">LINKEDIN ↗</a>
-        <a href="https://github.com/hulyazorluu-bit" target="_blank" rel="noopener">GITHUB ↗</a>
-        <a href="assets/Hulya_Zorlu_VIE.pdf" target="_blank" rel="noopener"><span class="t-fr">LIRE.CV</span><span class="t-en">READ.CV</span> ↗</a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- SVG filter: liquid wave for thumbs without image -->
-  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-    <defs>
-      <filter id="liquid-wave" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="linearRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="3" seed="5" result="noise">
-          <animate attributeName="baseFrequency" dur="14s" keyTimes="0;0.5;1" values="0.012 0.018;0.018 0.024;0.012 0.018" repeatCount="indefinite"/>
-        </feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs>
-  </svg>
-
-  <script src="main.js?v=92"></script>
-  <script src="title-gl.js?v=92"></script>
-  <script src="fx-images.js?v=92"></script>
-  <script src="fx-sections.js?v=92"></script>
-
-  <script>
-    (function () {
-      var chars = document.querySelectorAll('.ttj .char');
-      if (!chars.length) return;
-
-      document.addEventListener('mousemove', function (e) {
-        for (var i = 0; i < chars.length; i++) {
-          var r  = chars[i].getBoundingClientRect();
-          var dx = (r.left + r.width  / 2) - e.clientX;
-          var dy = (r.top  + r.height / 2) - e.clientY;
-          var d  = Math.sqrt(dx * dx + dy * dy) || 1;
-          var g  = Math.exp(-(d * d) / (2 * 90 * 90));
-
-          chars[i].style.transition = 'transform 0s';
-          chars[i].style.transform  = 'translate('
-            + ((dx / d) * 6 * g).toFixed(1) + 'px,'
-            + ((dy / d) * 6 * g).toFixed(1) + 'px)';
-        }
-      }, { passive: true });
-
-      document.addEventListener('mouseleave', function () {
-        for (var i = 0; i < chars.length; i++) {
-          chars[i].style.transition = 'transform 1s cubic-bezier(0.25,0.46,0.45,0.94)';
-          chars[i].style.transform  = '';
-        }
-      });
-    })();
-  </script>
-
-</body>
-</html>
