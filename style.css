@@ -834,6 +834,7 @@ html.lang-fr .t-en { display: none !important; }
 .about_tag_label { margin-left: calc(var(--col-unit) - var(--gg)); }
 
 .about_title {
+  line-height: 1.1;
   grid-column: 2 / 9;
   grid-row: 2;
   font-family: montrealbook, 'Helvetica Neue', sans-serif;
@@ -846,15 +847,12 @@ html.lang-fr .t-en { display: none !important; }
   z-index: 1;
   transform: translateX(calc(-1 * var(--gg)));
 }
+
 .about_t1,
 .about_t2 {
   display: block;
   overflow-wrap: normal;
   word-break: keep-all;
-  line-height: 1.15;
-}
-.about_t2 {
-  margin-top: 0.5em;
 }
 
 .about_desc {
